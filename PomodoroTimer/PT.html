@@ -107,6 +107,24 @@
     .Stop {
       background-color: brown;
     }
+
+    .FAalert {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      font-size: 50px;
+      color: red;
+      background-color: antiquewhite;
+      padding: 20px;
+      border: 2px solid black;
+      border-radius: 15px;
+    }
+
+    audio {
+      display: none;
+    }
   </style>
   <body>
     <div class="bacG">
@@ -116,18 +134,18 @@
       <div class="inputArea">
         <input class="TN" type="text" placeholder="Task Name" />
         <br />
-        <select name="time" id="time" title="time">
-          <option value="15">15 Minutes</option>
-          <option value="25">25 Minutes</option>
-          <option value="30">30 Minutes</option>
-          <option value="45">45 Minutes</option>
-          <option value="60">60 Minutes</option>
-        </select>
+        <input
+          name="time"
+          id="time"
+          title="time"
+          placeholder="Time (minutes)"
+        />
       </div>
       <button class="Start">Start</button>
       <button class="Stop">Stop</button>
       <div class="btnGroup"></div>
     </div>
+    <audio src="./无标题视频——使用Clipchamp制作.m4a"></audio>
 
     <!------------------------JavaScript----------------------------->
 
@@ -143,16 +161,67 @@
       const TN = document.querySelector(".TN"); //task name input
       const Restart = document.createElement(`button`);
       const Rest = document.createElement(`button`);
+      const audio = document.querySelector(`audio`);
+      Restart.innerHTML = `Restart`;
+      Rest.innerHTML = `Rest`;
       let Continue = false;
-      let Timer;
+      let Timer = null;
       let minute;
       let second = 0;
 
       Stop.disabled = true;
+
+      //click restart button
+      Restart.addEventListener(`click`, () => {
+        Continue = false;
+        second = 0;
+        clearInterval(Timer);
+        startCount();
+      });
+
+      //click rest button
+      Rest.addEventListener(`click`, () => {
+        second = 0;
+        clearInterval(Timer);
+        resetUI();
+      });
+
       //format time display
       const formatTwoDigits = (n) => (n < 10 ? "0" : "") + n;
-      Restart.innerHTML = `Restart`;
-      Rest.innerHTML = `Rest`;
+
+      function message() {
+        audio.play();
+        const FAalert = document.createElement(`div`);
+        FAalert.classList.add(`FAalert`);
+        FAalert.innerHTML = `FA！！！！ Time is up`;
+        document.body.backgroundColor = `black`;
+        document.body.style.zIndex = `9999`;
+        document.body.onclick = () => {
+          document.body.backgroundColor = `white`;
+          document.body.removeChild(FAalert);
+          document.body.style.zIndex = `0`;
+        };
+        document.body.appendChild(FAalert);
+      }
+      //count down function
+      function startTimer() {
+        Timer = setInterval(() => {
+          countDown.innerHTML = `${formatTwoDigits(minute)}:${formatTwoDigits(second)}`;
+
+          if (second === 0) {
+            if (minute === 0) {
+              clearInterval(Timer);
+              resetUI();
+              message();
+              return;
+            }
+            minute--;
+            second = 59;
+          } else {
+            second--;
+          }
+        }, 1000);
+      }
 
       //start count down
       function startCount() {
@@ -167,50 +236,24 @@
         if (!Continue) {
           minute = time.value;
         }
-        statTimer();
+        startTimer();
       }
 
       //click start button
       Start.addEventListener("click", () => {
         startCount();
-
-        Restart.addEventListener(`click`, () => {
-          Continue = false;
-          second = 0;
-          clearInterval(Timer);
-          startCount();
-        });
-        //set rest time
-        Rest.addEventListener(`click`, () => {
-          clearInterval(Timer);
-          Start.disabled = false;
-          Start.innerHTML = `Start`;
-          TaskName.innerHTML = `Workname`;
-          status.innerHTML = `Resting`;
-          countDown.style.backgroundColor = `rgb(188, 3, 255)`;
-          countDown.innerHTML = `00:00`;
-          btnGroup.removeChild(Restart);
-          btnGroup.removeChild(Rest);
-        });
       });
 
-      //count down function
-      function statTimer() {
-        countDown.innerHTML = `${minute}:${formatTwoDigits(second)}`;
-        Timer = setInterval(function () {
-          countDown.innerHTML = `${formatTwoDigits(minute)}:${formatTwoDigits(second)}`;
-          second--;
-          if (second < 0) {
-            minute--;
-            second = 59;
-          }
-        }, 1000);
-        if (minute === 0) {
-          clearInterval(Timer);
-          Start.disabled = false;
-          Continue = false;
-          countDown.style.backgroundColor = rgb(188, 3, 255);
-        }
+      function resetUI() {
+        Start.disabled = false;
+        Start.innerHTML = `Start`;
+        TaskName.innerHTML = `Workname`;
+        status.innerHTML = `Resting`;
+        countDown.style.backgroundColor = `rgb(188, 3, 255)`;
+        countDown.innerHTML = `00:00`;
+
+        if (Restart.parentNode === btnGroup) btnGroup.removeChild(Restart);
+        if (Rest.parentNode === btnGroup) btnGroup.removeChild(Rest);
       }
 
       //click stop button
