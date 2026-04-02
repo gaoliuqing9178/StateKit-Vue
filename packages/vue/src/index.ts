@@ -26,4 +26,4 @@ export { default as TaskSuccessState } from "./blocks/success/TaskSuccessState.v
 export { default as InviteSuccessState } from "./blocks/success/InviteSuccessState.vue";
 export { default as PublishSuccessState } from "./blocks/success/PublishSuccessState.vue";
 export type { PresetStateBlockProps } from "./types";
-export * from "@statekit/shared";
+export * from "@statekit-vue/shared";

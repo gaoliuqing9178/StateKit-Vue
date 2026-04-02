@@ -1,19 +1,19 @@
-# @statekit/shared
+# @statekit-vue/shared
 
 Shared types and metadata for StateKit preset state blocks.
 
-`@statekit/shared` is the source-of-truth layer behind StateKit. It exports block ids, categories, layout and tone types, metadata lists, and helpers used by framework packages and docs tooling.
+`@statekit-vue/shared` is the source-of-truth layer behind StateKit. It exports block ids, categories, layout and tone types, metadata lists, and helpers used by framework packages and docs tooling.
 
 ## Install
 
 ```bash
-npm install @statekit/shared
+npm install @statekit-vue/shared
 ```
 
 ## Use
 
 ```ts
-import { priorityStateBlocks, stateBlockMetaList } from "@statekit/shared";
+import { priorityStateBlocks, stateBlockMetaList } from "@statekit-vue/shared";
 
 console.log(stateBlockMetaList.length);
 console.log(priorityStateBlocks.map((block) => block.id));

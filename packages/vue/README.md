@@ -1,21 +1,21 @@
-# @statekit/vue
+# @statekit-vue/vue
 
 Scenario-first Vue state UI blocks for SaaS products.
 
-`@statekit/vue` is the main package most app teams should install. It ships preset state blocks such as empty, loading, error, permission, upgrade, and success screens, plus the shared stylesheet used by those presets.
+`@statekit-vue/vue` is the main package most app teams should install. It ships preset state blocks such as empty, loading, error, permission, upgrade, and success screens, plus the shared stylesheet used by those presets.
 
 ## Install
 
 ```bash
-npm install @statekit/vue
+npm install @statekit-vue/vue
 ```
 
 ## Use
 
 ```vue
 <script setup lang="ts">
-import "@statekit/vue/styles.css";
-import { EmptySearchState } from "@statekit/vue";
+import "@statekit-vue/vue/styles.css";
+import { EmptySearchState } from "@statekit-vue/vue";
 </script>
 
 <template>
@@ -32,7 +32,7 @@ import { EmptySearchState } from "@statekit/vue";
 
 - 18 preset state blocks for Vue 3
 - Shared props for `title`, `description`, `tone`, `density`, `layout`, `primaryAction`, and `secondaryAction`
-- Default stylesheet entry at `@statekit/vue/styles.css`
+- Default stylesheet entry at `@statekit-vue/vue/styles.css`
 
 ## More
 

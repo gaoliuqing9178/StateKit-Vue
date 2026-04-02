@@ -17,10 +17,10 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "baseUrl": ".",
     "paths": {
-      "@statekit/shared": ["packages/shared/src/index.ts"],
-      "@statekit/shared/*": ["packages/shared/src/*"],
-      "@statekit/vue": ["packages/vue/src/index.ts"],
-      "@statekit/vue/*": ["packages/vue/src/*"]
+      "@statekit-vue/shared": ["packages/shared/src/index.ts"],
+      "@statekit-vue/shared/*": ["packages/shared/src/*"],
+      "@statekit-vue/vue": ["packages/vue/src/index.ts"],
+      "@statekit-vue/vue/*": ["packages/vue/src/*"]
     }
   }
 }

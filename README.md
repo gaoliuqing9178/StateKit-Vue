@@ -22,14 +22,14 @@ Onboarding-style entry points are currently handled through first-run empty stat
 ## Quick Start
 
 ```bash
-npm install @statekit/vue
+npm install @statekit-vue/vue
 ```
 
 ```vue
 <script setup lang="ts">
 import { ref } from "vue";
-import "@statekit/vue/styles.css";
-import { EmptySearchState } from "@statekit/vue";
+import "@statekit-vue/vue/styles.css";
+import { EmptySearchState } from "@statekit-vue/vue";
 
 const clearing = ref(false);
 

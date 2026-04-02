@@ -37,7 +37,7 @@ H:\lilProject
 
 - 提供对外可直接导入的 Vue 组件。
 - 使用 `StatePresetBlock` 将 shared 层的元数据映射到统一的 `StateBlockShell`。
-- 提供默认样式文件 `@statekit/vue/styles.css`。
+- 提供默认样式文件 `@statekit-vue/vue/styles.css`。
 
 当前实现特点：
 
@@ -50,8 +50,8 @@ H:\lilProject
 职责：
 
 - 作为产品文档站展示 StateKit 的价值、安装方式和 Block 明细。
-- 从 `@statekit/shared` 直接读取 Block 元数据。
-- 从 `@statekit/vue` 读取实际组件进行 live preview。
+- 从 `@statekit-vue/shared` 直接读取 Block 元数据。
+- 从 `@statekit-vue/vue` 读取实际组件进行 live preview。
 
 当前站点路由：
 

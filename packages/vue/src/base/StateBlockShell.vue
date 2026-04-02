@@ -7,7 +7,7 @@ import type {
   StateDensity,
   StateLayout,
   StateTone,
-} from "@statekit/shared";
+} from "@statekit-vue/shared";
 
 interface Props extends BaseStateProps {
   category?: StateCategory;

@@ -1,10 +1,10 @@
-import type { StateActionSlot, StateBlockMeta } from "@statekit/shared";
+import type { StateActionSlot, StateBlockMeta } from "@statekit-vue/shared";
 
-export const installSnippet = "npm install @statekit/vue";
+export const installSnippet = "npm install @statekit-vue/vue";
 
 export const baseUsageSnippet = [
-  'import "@statekit/vue/styles.css";',
-  'import { EmptySearchState } from "@statekit/vue";',
+  'import "@statekit-vue/vue/styles.css";',
+  'import { EmptySearchState } from "@statekit-vue/vue";',
 ].join("\n");
 
 export const minimalUsageSnippet = [
@@ -82,8 +82,8 @@ function appendLiteralActionAttribute(
 
 function sharedImportLines(componentName: string) {
   return [
-    'import "@statekit/vue/styles.css";',
-    `import { ${componentName} } from "@statekit/vue";`,
+    'import "@statekit-vue/vue/styles.css";',
+    `import { ${componentName} } from "@statekit-vue/vue";`,
   ];
 }
 
@@ -130,7 +130,7 @@ export function blockScriptBindingSnippet(meta: StateBlockMeta) {
   return [
     '<script setup lang="ts">',
     'import { ref } from "vue";',
-    `import { ${meta.componentName} } from "@statekit/vue";`,
+    `import { ${meta.componentName} } from "@statekit-vue/vue";`,
     "",
     `const pageTitle = ref(${toSingleQuoted(titleText)});`,
     `const helperCopy = ref(${toSingleQuoted(descriptionText)});`,
@@ -170,7 +170,7 @@ export function blockObjectBindingSnippet(meta: StateBlockMeta) {
   return [
     '<script setup lang="ts">',
     'import { computed, ref } from "vue";',
-    `import { ${meta.componentName}, type PresetStateBlockProps } from "@statekit/vue";`,
+    `import { ${meta.componentName}, type PresetStateBlockProps } from "@statekit-vue/vue";`,
     "",
     "const busy = ref(false);",
     "",
@@ -208,7 +208,7 @@ export function blockActionSnippet(meta: StateBlockMeta) {
   return [
     '<script setup lang="ts">',
     'import { ref } from "vue";',
-    `import { ${meta.componentName} } from "@statekit/vue";`,
+    `import { ${meta.componentName} } from "@statekit-vue/vue";`,
     "",
     "const pending = ref(false);",
     "",

@@ -3,7 +3,7 @@ import type {
   StateDensity,
   StateLayout,
   StateTone,
-} from "@statekit/shared";
+} from "@statekit-vue/shared";
 
 export interface PresetStateBlockProps {
   title?: string;

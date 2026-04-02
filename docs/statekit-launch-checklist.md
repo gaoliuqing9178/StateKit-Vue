@@ -13,15 +13,15 @@
 
 ## 2. 包结构与导出
 
-- [x] `@statekit/shared` 的类型与元数据导出正常。
-- [x] `@statekit/vue` 能正常导出全部 18 个 Block 组件。
-- [x] `@statekit/vue/styles.css` 可被外部直接引入。
+- [x] `@statekit-vue/shared` 的类型与元数据导出正常。
+- [x] `@statekit-vue/vue` 能正常导出全部 18 个 Block 组件。
+- [x] `@statekit-vue/vue/styles.css` 可被外部直接引入。
 - [x] 根 workspace 的脚本能在当前环境中正常运行。
 
 ## 3. 文档准备
 
 - [x] `docs/README.md` 已更新为当前版本，不再是占位索引。
-- [ ] `docs` 目录中的产品、规格、实现、QA 和发布文档已互相对齐。
+- [x] `docs` 目录中的产品、规格、实现、QA 和发布文档已互相对齐。
 - [x] 根 `README.md` 与 `README.zh-CN.md` 已按 README Outline 补齐。
 - [x] 安装说明与实际包名、样式入口完全一致。
 
@@ -54,7 +54,13 @@
 - [x] `packages/shared/package.json` 与 `packages/vue/package.json` 中的名称、版本、导出字段正确。
 - [x] 依赖与 peerDependencies 已校对。
 - [x] 没有把内部 demo、dist 垃圾文件或错误路径当成发布内容。
-- [ ] 版本号策略和 changelog 方式已经确定。
+- [x] 版本号策略和 changelog 方式已经确定。
+
+当前首发结果：
+
+- [x] `@statekit-vue/shared@0.1.0` 已发布且为 `public`
+- [x] `@statekit-vue/vue@0.1.0` 已发布且为 `public`
+- [x] 两个包的 `latest` dist-tag 当前都指向 `0.1.0`
 
 如果只是开源仓库展示，可适当跳过 npm 发布细项，但文档和构建项不能跳。
 

@@ -8,8 +8,8 @@
     "emitDeclarationOnly": true,
     "noEmit": false,
     "paths": {
-      "@statekit/shared": ["packages/shared/dist/index.d.ts"],
-      "@statekit/shared/*": ["packages/shared/dist/*"]
+      "@statekit-vue/shared": ["packages/shared/dist/index.d.ts"],
+      "@statekit-vue/shared/*": ["packages/shared/dist/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.vue"]

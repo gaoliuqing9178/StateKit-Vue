@@ -5,7 +5,7 @@
  * 3. ??????? shared ?????????????????????
  */
 
-import { priorityStateBlocks, stateBlockMetaBySlug, stateBlockMetaList } from "@statekit/shared";
+import { priorityStateBlocks, stateBlockMetaBySlug, stateBlockMetaList } from "@statekit-vue/shared";
 export const allBlockDocs = stateBlockMetaList;
 export const featuredBlockDocs = priorityStateBlocks;
 export function getBlockDocBySlug(slug: string) { return stateBlockMetaBySlug[slug]; }

@@ -57,14 +57,14 @@ Scenario-first state UI building blocks for SaaS products built with Vue.
 最少包含：
 
 ```bash
-npm install @statekit/vue
+npm install @statekit-vue/vue
 ```
 
 以及：
 
 ```ts
-import "@statekit/vue/styles.css";
-import { EmptySearchState } from "@statekit/vue";
+import "@statekit-vue/vue/styles.css";
+import { EmptySearchState } from "@statekit-vue/vue";
 ```
 
 再给一个极简模板示例。

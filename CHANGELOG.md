@@ -1,6 +1,6 @@
 # StateKit 改动说明
 
-这轮内容可以概括为六块：
+这轮内容可以概括为七块：
 
 ## 1. CTA Action API 已经补齐
 
@@ -77,6 +77,13 @@
 - V1 仍明确是 18 个 Block / 6 个类别；onboarding 继续通过 `FirstProjectState` 这类 first-run empty state 承接，而不是独立类别。
 - 当前验证状态统一以最新命令结果为准，不再沿用过期的未验证说明。
 
+## 7. npm 包已切换到 `@statekit-vue/*` scope 并完成首发
+
+- 发布 scope 已从仓库内部沿用的 `@statekit/*` 调整为实际可发布的 `@statekit-vue/*`。
+- 根脚本、workspace 依赖、TypeScript path alias、Vite alias、docs/example 引用、README 和 smoke install 流程都已切换到 `@statekit-vue/shared` 与 `@statekit-vue/vue`。
+- `@statekit-vue/shared@0.1.0` 与 `@statekit-vue/vue@0.1.0` 已发布到 npm，当前 `latest` dist-tag 均指向 `0.1.0`，包状态为 `public`。
+- 后续继续发版时，需要同时升级 `packages/shared/package.json`、`packages/vue/package.json`，以及 `packages/vue/package.json` 中对 `@statekit-vue/shared` 的依赖版本。
+
 ## 验证状态
 
 - `npm run typecheck` 已通过。
@@ -93,9 +100,11 @@
 - Refreshed the root docs in [README.md](./README.md) and [README.zh-CN.md](./README.zh-CN.md) so the repository-level documentation matches the current action object, parameter passing rules, and docs/example entry points.
 - Polished [packages/vue/src/styles/base.css](./packages/vue/src/styles/base.css) so `page` layout actions center correctly and `panel` layout collapses earlier at medium widths, preventing title and CTA clipping in the shared shell.
 - Aligned the release-facing docs and handoff notes in [README.md](./README.md), [README.zh-CN.md](./README.zh-CN.md), [CHANGELOG.md](./CHANGELOG.md), [剩餘部分.md](./剩餘部分.md), [docs/statekit-ai-handoff-brief.md](./docs/statekit-ai-handoff-brief.md), and [docs/statekit-launch-checklist.md](./docs/statekit-launch-checklist.md) so completion status, remaining work, validation, and V1 scope now use the same wording.
+- Renamed the publishable packages from `@statekit/shared` and `@statekit/vue` to `@statekit-vue/shared` and `@statekit-vue/vue`, then updated workspace scripts, aliases, docs, examples, and smoke-install coverage to match the new public scope.
 - Added [TODO.md](./TODO.md) to collect the remaining release, QA, and follow-up work into one executable checklist.
 
 ### Verified
 
 - `npm run typecheck`, `npm run build`, `npm run pack:check`, and `npm run smoke:install` pass against the current workspace state.
 - `smoke:install` completes with an external consumer install plus production build using the published package surface.
+- `@statekit-vue/shared@0.1.0` and `@statekit-vue/vue@0.1.0` are published on npm with public access and `latest` pointing at `0.1.0`.

@@ -6,7 +6,7 @@ import {
   SessionExpiredState,
   UpgradePlanState,
   UsageLimitState,
-} from "@statekit/vue";
+} from "@statekit-vue/vue";
 
 const accessRequestPending = ref(false);
 const accessRequestsSent = ref(4);

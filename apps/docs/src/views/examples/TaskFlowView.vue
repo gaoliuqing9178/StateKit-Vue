@@ -5,7 +5,7 @@ import {
   LoadingImportState,
   PublishSuccessState,
   TaskSuccessState,
-} from "@statekit/vue";
+} from "@statekit-vue/vue";
 
 const logOpenPending = ref(false);
 const logViews = ref(6);

@@ -78,8 +78,8 @@ async function writeConsumerProject(projectDir, sharedTarball, vueTarball) {
       typecheck: "vue-tsc --noEmit -p tsconfig.json",
     },
     dependencies: {
-      "@statekit/shared": `file:${sharedTarball.replaceAll("\\", "/")}`,
-      "@statekit/vue": `file:${vueTarball.replaceAll("\\", "/")}`,
+      "@statekit-vue/shared": `file:${sharedTarball.replaceAll("\\", "/")}`,
+      "@statekit-vue/vue": `file:${vueTarball.replaceAll("\\", "/")}`,
       vue: "^3.4.0",
     },
     devDependencies: {
@@ -108,8 +108,8 @@ async function writeConsumerProject(projectDir, sharedTarball, vueTarball) {
   };
 
   const appVue = `<script setup lang="ts">
-import { EmptySearchState } from "@statekit/vue";
-import { priorityStateBlockIds, stateBlockMetaList } from "@statekit/shared";
+import { EmptySearchState } from "@statekit-vue/vue";
+import { priorityStateBlockIds, stateBlockMetaList } from "@statekit-vue/shared";
 
 const description = \`Loaded \${stateBlockMetaList.length} packed blocks and \${priorityStateBlockIds.length} launch states from npm tarballs.\`;
 const primaryAction = {
@@ -144,7 +144,7 @@ const secondaryAction = null;
 
   const mainTs = `import { createApp } from "vue";
 import App from "./App.vue";
-import "@statekit/vue/styles.css";
+import "@statekit-vue/vue/styles.css";
 
 createApp(App).mount("#app");
 `;

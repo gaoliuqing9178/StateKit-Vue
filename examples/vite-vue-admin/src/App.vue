@@ -6,7 +6,7 @@ import {
   NoPermissionState,
   PublishSuccessState,
   UpgradePlanState,
-} from "@statekit/vue";
+} from "@statekit-vue/vue";
 
 const navItems = [
   { label: "Overview", count: "12", active: true },
@@ -27,11 +27,6 @@ function wait(ms: number) {
   return new Promise<void>((resolve) => {
     window.setTimeout(resolve, ms);
   });
-}
-
-function test() {
-  console.log(`sjdhfbkasdnas`);
-  
 }
 
 function clearFilters() {
@@ -244,7 +239,6 @@ const searchPrimaryAction = computed(() =>
             :secondary-action="{
               label: 'Review billing policy',
               href: '#billing-policy',
-              onClick:test,
             }"
           />
 

@@ -22,14 +22,14 @@ V1 目前提供 18 个预置 Block，覆盖 6 个类别：
 ## 快速开始
 
 ```bash
-npm install @statekit/vue
+npm install @statekit-vue/vue
 ```
 
 ```vue
 <script setup lang="ts">
 import { ref } from "vue";
-import "@statekit/vue/styles.css";
-import { EmptySearchState } from "@statekit/vue";
+import "@statekit-vue/vue/styles.css";
+import { EmptySearchState } from "@statekit-vue/vue";
 
 const clearing = ref(false);
 

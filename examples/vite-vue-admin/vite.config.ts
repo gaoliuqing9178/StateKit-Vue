@@ -13,15 +13,15 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: "@statekit/vue/styles.css",
+        find: "@statekit-vue/vue/styles.css",
         replacement: fileURLToPath(new URL("../../packages/vue/src/styles/index.css", import.meta.url)),
       },
       {
-        find: "@statekit/shared",
+        find: "@statekit-vue/shared",
         replacement: fileURLToPath(new URL("../../packages/shared/src/index.ts", import.meta.url)),
       },
       {
-        find: "@statekit/vue",
+        find: "@statekit-vue/vue",
         replacement: fileURLToPath(new URL("../../packages/vue/src/index.ts", import.meta.url)),
       },
     ],

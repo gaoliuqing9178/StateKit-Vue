@@ -25,7 +25,7 @@ import {
   TaskSuccessState,
   InviteSuccessState,
   PublishSuccessState,
-} from "@statekit/vue";
+} from "@statekit-vue/vue";
 export const blockComponentMap: Record<string, Component> = {
   EmptyCollectionState,
   EmptySearchState,

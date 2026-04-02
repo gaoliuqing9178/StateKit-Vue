@@ -4,7 +4,7 @@ import {
   stateBlockMetaById,
   type BaseStateProps,
   type StateBlockId,
-} from "@statekit/shared";
+} from "@statekit-vue/shared";
 import StateBlockShell from "./StateBlockShell.vue";
 import type { PresetStateBlockProps } from "../types";
 

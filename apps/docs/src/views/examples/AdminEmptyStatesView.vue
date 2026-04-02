@@ -4,7 +4,7 @@ import {
   EmptyCollectionState,
   EmptySearchState,
   FirstProjectState,
-} from "@statekit/vue";
+} from "@statekit-vue/vue";
 
 const activeFilters = ref([
   "Campaign: Spring relaunch",

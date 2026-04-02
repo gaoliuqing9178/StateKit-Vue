@@ -8,5 +8,5 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import "./styles.css";
-import "@statekit/vue/styles.css";
+import "@statekit-vue/vue/styles.css";
 createApp(App).mount("#app");
