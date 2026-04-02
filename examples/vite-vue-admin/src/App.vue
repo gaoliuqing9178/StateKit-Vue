@@ -15,10 +15,7 @@ const navItems = [
   { label: "Automation", count: "05", active: false },
 ] as const;
 
-const searchFilters = ref([
-  "Campaign: Spring relaunch",
-  "Type: Hero image",
-]);
+const searchFilters = ref(["Campaign: Spring relaunch", "Type: Hero image"]);
 const savedViews = ref(3);
 const accessRequests = ref(2);
 const billingEscalations = ref(1);
@@ -30,6 +27,11 @@ function wait(ms: number) {
   return new Promise<void>((resolve) => {
     window.setTimeout(resolve, ms);
   });
+}
+
+function test() {
+  console.log(`sjdhfbkasdnas`);
+  
 }
 
 function clearFilters() {
@@ -175,7 +177,10 @@ const searchPrimaryAction = computed(() =>
             >
               {{ filter }}
             </li>
-            <li v-if="!searchFilters.length" class="surface-note-list__item is-muted">
+            <li
+              v-if="!searchFilters.length"
+              class="surface-note-list__item is-muted"
+            >
               No active filters remain, so the primary CTA is disabled.
             </li>
           </ul>
@@ -226,7 +231,7 @@ const searchPrimaryAction = computed(() =>
           </div>
 
           <UpgradePlanState
-            layout="panel"
+            layout="inline"
             density="compact"
             title="Upgrade to unlock approval routing"
             description="Move this workspace to the workflow plan to enable approval chains and audit-ready automation."
@@ -239,6 +244,7 @@ const searchPrimaryAction = computed(() =>
             :secondary-action="{
               label: 'Review billing policy',
               href: '#billing-policy',
+              onClick:test,
             }"
           />
 
@@ -291,7 +297,8 @@ const searchPrimaryAction = computed(() =>
         </div>
 
         <PublishSuccessState
-          layout="panel"
+          tone="success"
+          layout="page"
           density="compact"
           title="Campaign bundle is live"
           description="Review the final publish summary or move straight into the next release wave."

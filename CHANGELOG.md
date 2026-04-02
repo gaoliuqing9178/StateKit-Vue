@@ -1,6 +1,6 @@
 # StateKit 改动说明
 
-这轮内容可以概括为四块：
+这轮内容可以概括为六块：
 
 ## 1. CTA Action API 已经补齐
 
@@ -61,11 +61,29 @@
   - `examples/vite-vue-admin/src/App.vue`
   - `examples/vite-vue-admin/src/styles.css`
 
+## 5. `StateBlockShell` 的中等宽度响应式细节已继续修正
+
+- `page` 布局下的 `sk-shell__actions` 现在会居中显示，避免 CTA 仍贴左导致页面型状态块失衡。
+- `panel` 布局在 `1160px` 及以下会提前折叠成单栏，并按 `compact` / `cozy` / `spacious` density 采用不同的内边距。
+- `.sk-shell__content` 现在补上了 `min-width: 0`，用于避免标题、描述和按钮在中等宽度下被 grid 子项挤压后发生遮挡。
+- 这轮修正主要覆盖此前实际暴露出来的 `page` CTA 对齐问题，以及 `panel` 在 `1160px~1000px`、`920px~760px` 一带的标题和按钮裁切问题。
+- 关键文件：
+  - `packages/vue/src/styles/base.css`
+
+## 6. 发布面文档口径已对齐
+
+- `README.md`、`README.zh-CN.md`、`CHANGELOG.md`、`剩餘部分.md`、`docs/statekit-ai-handoff-brief.md`、`docs/statekit-launch-checklist.md` 现在使用同一套对外口径。
+- 根 README 与中文 README 已补齐，不再把“重写 README”作为当前待完成项。
+- V1 仍明确是 18 个 Block / 6 个类别；onboarding 继续通过 `FirstProjectState` 这类 first-run empty state 承接，而不是独立类别。
+- 当前验证状态统一以最新命令结果为准，不再沿用过期的未验证说明。
+
 ## 验证状态
 
 - `npm run typecheck` 已通过。
 - `npm run build` 已通过。
-- 这两项验证是在 example 重写之后重新跑过的。
+- `npm run pack:check` 已通过。
+- `npm run smoke:install` 已通过。
+- 以上四项已经在当前 docs / example / README / `StateBlockShell` 响应式调整之后重新执行。
 
 ### Changed
 
@@ -73,7 +91,11 @@
 - Rewrote the docs example routes in [apps/docs/src/views/examples/AdminEmptyStatesView.vue](./apps/docs/src/views/examples/AdminEmptyStatesView.vue), [apps/docs/src/views/examples/PermissionsAndUpgradeView.vue](./apps/docs/src/views/examples/PermissionsAndUpgradeView.vue), and [apps/docs/src/views/examples/TaskFlowView.vue](./apps/docs/src/views/examples/TaskFlowView.vue), plus the shared example copy in [apps/docs/src/lib/copy.ts](./apps/docs/src/lib/copy.ts) and [apps/docs/src/demo-styles.css](./apps/docs/src/demo-styles.css), so the examples reflect the current CTA API instead of the earlier placeholder flows.
 - Updated the external consumer example in [examples/vite-vue-admin/src/App.vue](./examples/vite-vue-admin/src/App.vue) and [examples/vite-vue-admin/src/styles.css](./examples/vite-vue-admin/src/styles.css) to demonstrate the current action surface with `onClick`, `href`, `loading`, `loadingLabel`, `disabled`, and explicit `null` action removal.
 - Refreshed the root docs in [README.md](./README.md) and [README.zh-CN.md](./README.zh-CN.md) so the repository-level documentation matches the current action object, parameter passing rules, and docs/example entry points.
+- Polished [packages/vue/src/styles/base.css](./packages/vue/src/styles/base.css) so `page` layout actions center correctly and `panel` layout collapses earlier at medium widths, preventing title and CTA clipping in the shared shell.
+- Aligned the release-facing docs and handoff notes in [README.md](./README.md), [README.zh-CN.md](./README.zh-CN.md), [CHANGELOG.md](./CHANGELOG.md), [剩餘部分.md](./剩餘部分.md), [docs/statekit-ai-handoff-brief.md](./docs/statekit-ai-handoff-brief.md), and [docs/statekit-launch-checklist.md](./docs/statekit-launch-checklist.md) so completion status, remaining work, validation, and V1 scope now use the same wording.
+- Added [TODO.md](./TODO.md) to collect the remaining release, QA, and follow-up work into one executable checklist.
 
 ### Verified
 
-- `npm run typecheck` and `npm run build` pass after the docs block-detail rewrite and example refresh.
+- `npm run typecheck`, `npm run build`, `npm run pack:check`, and `npm run smoke:install` pass against the current workspace state.
+- `smoke:install` completes with an external consumer install plus production build using the published package surface.

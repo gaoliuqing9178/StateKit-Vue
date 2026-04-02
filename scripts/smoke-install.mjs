@@ -4,7 +4,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
 
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const repoRoot = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "..",
+);
 const npmCommand = "npm";
 const keepTemp = process.env.STATEKIT_SMOKE_KEEP_TEMP === "1";
 
@@ -38,7 +41,9 @@ function runCommand(command, args, options = {}) {
       }
 
       const message = capture
-        ? stderr.trim() || stdout.trim() || `${command} ${args.join(" ")} failed`
+        ? stderr.trim() ||
+          stdout.trim() ||
+          `${command} ${args.join(" ")} failed`
         : `${command} ${args.join(" ")} failed with exit code ${code}`;
       reject(new Error(message));
     });
@@ -194,8 +199,14 @@ async function main() {
   try {
     await mkdir(packsDir, { recursive: true });
 
-    const sharedTarball = await packWorkspace(path.join(repoRoot, "packages", "shared"), packsDir);
-    const vueTarball = await packWorkspace(path.join(repoRoot, "packages", "vue"), packsDir);
+    const sharedTarball = await packWorkspace(
+      path.join(repoRoot, "packages", "shared"),
+      packsDir,
+    );
+    const vueTarball = await packWorkspace(
+      path.join(repoRoot, "packages", "vue"),
+      packsDir,
+    );
 
     await writeConsumerProject(consumerDir, sharedTarball, vueTarball);
 
