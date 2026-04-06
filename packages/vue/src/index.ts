@@ -1,8 +1,8 @@
 /**
- * StateKit ?????
- * 1. Vue ??????
- * 2. ???????????????? block ?????????????
- * 3. ?????????????? API ?????????????????????
+ * Vue 包入口：
+ * 1. 导出推荐的类别优先入口组件。
+ * 2. 继续导出旧的场景化组件名，作为兼容层，方便存量项目平滑迁移。
+ * 3. 样式在入口统一注入，因此大多数消费方只需要导入这个包即可拿到完整体验。
  */
 
 import "./styles/index.css";
@@ -43,92 +43,92 @@ export const UpgradeState: typeof UpgradeStateComponent = UpgradeStateComponent;
 export const SuccessState: typeof SuccessStateComponent = SuccessStateComponent;
 
 /**
- * @deprecated Use `EmptyState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `EmptyState`，并通过内容、布局和动作参数自行定制。
  */
 export const EmptyCollectionState: typeof EmptyCollectionStateComponent =
   EmptyCollectionStateComponent;
 /**
- * @deprecated Use `EmptyState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `EmptyState`，并通过内容、布局和动作参数自行定制。
  */
 export const EmptySearchState: typeof EmptySearchStateComponent =
   EmptySearchStateComponent;
 /**
- * @deprecated Use `EmptyState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `EmptyState`，并通过内容、布局和动作参数自行定制。
  */
 export const FirstProjectState: typeof FirstProjectStateComponent =
   FirstProjectStateComponent;
 /**
- * @deprecated Use `LoadingState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `LoadingState`，并通过内容、布局和动作参数自行定制。
  */
 export const LoadingTableState: typeof LoadingTableStateComponent =
   LoadingTableStateComponent;
 /**
- * @deprecated Use `LoadingState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `LoadingState`，并通过内容、布局和动作参数自行定制。
  */
 export const LoadingWorkspaceState: typeof LoadingWorkspaceStateComponent =
   LoadingWorkspaceStateComponent;
 /**
- * @deprecated Use `LoadingState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `LoadingState`，并通过内容、布局和动作参数自行定制。
  */
 export const LoadingImportState: typeof LoadingImportStateComponent =
   LoadingImportStateComponent;
 /**
- * @deprecated Use `ErrorState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `ErrorState`，并通过内容、布局和动作参数自行定制。
  */
 export const InlineErrorState: typeof InlineErrorStateComponent =
   InlineErrorStateComponent;
 /**
- * @deprecated Use `ErrorState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `ErrorState`，并通过内容、布局和动作参数自行定制。
  */
 export const PageErrorState: typeof PageErrorStateComponent =
   PageErrorStateComponent;
 /**
- * @deprecated Use `ErrorState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `ErrorState`，并通过内容、布局和动作参数自行定制。
  */
 export const OfflineErrorState: typeof OfflineErrorStateComponent =
   OfflineErrorStateComponent;
 /**
- * @deprecated Use `PermissionState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `PermissionState`，并通过内容、布局和动作参数自行定制。
  */
 export const NoPermissionState: typeof NoPermissionStateComponent =
   NoPermissionStateComponent;
 /**
- * @deprecated Use `PermissionState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `PermissionState`，并通过内容、布局和动作参数自行定制。
  */
 export const RoleRestrictedState: typeof RoleRestrictedStateComponent =
   RoleRestrictedStateComponent;
 /**
- * @deprecated Use `PermissionState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `PermissionState`，并通过内容、布局和动作参数自行定制。
  */
 export const SessionExpiredState: typeof SessionExpiredStateComponent =
   SessionExpiredStateComponent;
 /**
- * @deprecated Use `UpgradeState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `UpgradeState`，并通过内容、布局和动作参数自行定制。
  */
 export const UpgradePlanState: typeof UpgradePlanStateComponent =
   UpgradePlanStateComponent;
 /**
- * @deprecated Use `UpgradeState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `UpgradeState`，并通过内容、布局和动作参数自行定制。
  */
 export const TrialEndingState: typeof TrialEndingStateComponent =
   TrialEndingStateComponent;
 /**
- * @deprecated Use `UpgradeState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `UpgradeState`，并通过内容、布局和动作参数自行定制。
  */
 export const UsageLimitState: typeof UsageLimitStateComponent =
   UsageLimitStateComponent;
 /**
- * @deprecated Use `SuccessState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `SuccessState`，并通过内容、布局和动作参数自行定制。
  */
 export const TaskSuccessState: typeof TaskSuccessStateComponent =
   TaskSuccessStateComponent;
 /**
- * @deprecated Use `SuccessState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `SuccessState`，并通过内容、布局和动作参数自行定制。
  */
 export const InviteSuccessState: typeof InviteSuccessStateComponent =
   InviteSuccessStateComponent;
 /**
- * @deprecated Use `SuccessState` and customize content, layout, and actions instead.
+ * @deprecated 请改用 `SuccessState`，并通过内容、布局和动作参数自行定制。
  */
 export const PublishSuccessState: typeof PublishSuccessStateComponent =
   PublishSuccessStateComponent;

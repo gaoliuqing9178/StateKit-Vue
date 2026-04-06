@@ -1,10 +1,16 @@
 /*
- * StateKit ?????
- * 1. ???????????
- * 2. ???????????????????????????????????
- * 3. ???????????? block ?????????????????????
+ * `StateBlockShell` 的核心样式都在这里。
+ * 这个文件同时负责：
+ * 1. 统一容器、插画、文案和按钮的基础外观；
+ * 2. 根据 tone/category/layout/density 四个维度切换视觉；
+ * 3. 提供响应式与动效兜底。
+ *
+ * 维护建议：
+ * - 想改全局视觉语义时，优先在这里收口，而不是去每个业务页面里补覆盖。
+ * - 想新增 theme token 时，先判断是否真的值得上升到 `tokens.css`。
  */
 
+/* 全局运行时变量与容器基线。 */
 :root{--sk-color-bg: #f5f7fb;
 --sk-color-surface: #ffffff;
 --sk-color-surface-muted: #eef2f8;
@@ -55,6 +61,8 @@ color:var(--sk-color-text)}
 --sk-accent-soft: var(--sk-color-warning-soft)}
 .sk-shell[data-tone=success]{--sk-accent: var(--sk-color-success);
 --sk-accent-soft: var(--sk-color-success-soft)}
+
+/* 容器内部的媒体区与图形骨架。 */
 .sk-shell__inner{display:grid;
 gap:var(--sk-space-8);
 align-items:center}
@@ -105,6 +113,8 @@ left:18px;
 border:8px solid color-mix(in srgb,var(--sk-accent) 18%,white);
 border-top-color:var(--sk-accent);
 border-radius:50%}
+
+/* 各类别默认插画的细节差异。 */
 .sk-figure--empty .sk-figure__panel{transform:rotate(-7deg)}
 .sk-figure--empty .sk-figure__panel.is-back{transform:translate(12px,-12px) rotate(8deg) scale(.92)}
 .sk-figure__cross,.sk-figure__check{left:32px;
@@ -161,6 +171,8 @@ transform:rotate(45deg)}
 top:48px;
 width:26px;
 transform:rotate(-45deg)}
+
+/* 文案区与操作区。 */
 .sk-shell__content{display:grid;
 min-width:0;
 gap:var(--sk-space-4)}
@@ -210,6 +222,8 @@ color:#8793a5;
 cursor:not-allowed}
 .sk-shell__action.is-loading:hover,.sk-shell__action.is-disabled:hover{transform:none;
 box-shadow:none}
+
+/* 三种布局模式：page、panel、inline。 */
 .sk-shell[data-layout=page] .sk-shell__inner{justify-items:center;
 padding:var(--sk-space-16);
 text-align:center}
@@ -227,6 +241,8 @@ border-radius:20px}
 height:58px;
 transform:scale(.8)}
 .sk-shell[data-layout=inline] .sk-shell__title{font-size:1.25rem}
+
+/* 密度模式主要影响内边距与插画尺寸。 */
 .sk-shell[data-density=compact] .sk-shell__inner{padding:var(--sk-space-6)}
 .sk-shell[data-density=compact] .sk-shell__media-frame{width:120px;
 height:120px}
@@ -235,6 +251,8 @@ height:120px}
 .sk-shell[data-density=spacious] .sk-shell__media-frame{width:200px;
 height:200px}
 .sk-shell[data-density=spacious] .sk-figure{transform:scale(1.08)}
+
+/* 动效与响应式收口。 */
 @media (prefers-reduced-motion: no-preference){.sk-figure--loading .sk-figure__ring{animation:sk-rotate 1.3s linear infinite}}
 @keyframes sk-rotate{to{transform:rotate(360deg)}
 }
@@ -254,6 +272,8 @@ height:132px}
 flex-direction:column}
 .sk-shell__action{width:100%}
 }
+
+/* 类别级背景细节，避免六类状态只靠一处颜色切换显得过于单薄。 */
 .sk-shell[data-category=empty]{background:radial-gradient(circle at top right,#fffffff5,#ffffffd1),linear-gradient(180deg,#fff,#f8fbff)}
 .sk-shell[data-category=loading]{background:radial-gradient(circle at top right,#fffffff5,#ffffffd6),linear-gradient(180deg,#fff,#f6f9ff)}
 .sk-shell[data-category=error]{background:radial-gradient(circle at top right,#fffffff5,#ffffffd1),linear-gradient(180deg,#fff,#fff7f7)}

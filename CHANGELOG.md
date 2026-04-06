@@ -1,6 +1,6 @@
 # StateKit Changelog
 
-## 2026-04-06 Release Prep (0.2.0)
+## 2026-04-06 Release (0.2.0)
 
 ### Added
 
@@ -13,12 +13,18 @@
 - Renamed the docs app's primary route family from `/blocks` to `/recipes` and added redirects from the old `/blocks` URLs for compatibility.
 - Renamed docs-internal helpers, data modules, and views from `block*` to `recipe*` so the docs codebase matches the current public terminology.
 - Refreshed the root README, Chinese README, package README copy, and handoff notes to use the current category-first and recipe-first language consistently.
-- Updated release metadata for `@statekit-vue/shared` and `@statekit-vue/vue`, including package descriptions and the next planned version line.
+- Updated release metadata for `@statekit-vue/shared` and `@statekit-vue/vue`, including package descriptions and the `0.2.0` version line.
 - Bumped `@statekit-vue/shared` and `@statekit-vue/vue` from `0.1.2` to `0.2.0`, and aligned workspace consumers on the same version line.
 
 ### Deprecated
 
 - Scenario-specific component exports remain available, but new code should prefer the unified category-first entries.
+
+### Published
+
+- Published `@statekit-vue/shared@0.2.0`.
+- Published `@statekit-vue/vue@0.2.0`.
+- Confirmed both packages expose `0.2.0` on npm after release.
 
 ### Verified
 
@@ -26,6 +32,8 @@
 - `npm run build`
 - `npm run pack:check`
 - `npm run smoke:install`
+- `npm view @statekit-vue/shared version`
+- `npm view @statekit-vue/vue version`
 
 ## 2026-04-02 Release (0.1.2)
 

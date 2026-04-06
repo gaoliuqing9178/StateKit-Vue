@@ -1,8 +1,12 @@
 /**
- * StateKit ?????
- * 1. ?? block ???????
- * 2. ??????????? block ???????????????????????
- * 3. ??????????????????????????
+ * 这里维护所有 preset block 的单一事实来源。
+ * Vue 包里的兼容包装组件、docs 的 recipes 列表、以及对外展示的默认文案，
+ * 最终都应该从这里读取，而不是分别在多个地方手写一份。
+ *
+ * 维护原则：
+ * 1. 如果只是想调整某个预设的默认标题、描述、布局或按钮，优先改这里。
+ * 2. `componentName` 指向推荐给业务方使用的统一类别入口，`id`/`slug` 才是具体 preset。
+ * 3. `supportedLayouts` 决定某个 preset 能否安全切换布局，`StatePresetBlock` 会据此兜底。
  */
 
 import type {
@@ -14,7 +18,14 @@ import type {
 const allLayouts: StateLayout[] = ["inline", "panel", "page"];
 const panelAndPage: StateLayout[] = ["panel", "page"];
 const inlineAndPanel: StateLayout[] = ["inline", "panel"];
+
+/**
+ * 所有预设场景的元数据清单。
+ * 顺序本身也有意义：docs 与部分消费方会按这里的顺序展示内容，
+ * 所以调整顺序前要先确认是否会影响展示优先级。
+ */
 export const stateBlockMetaList: StateBlockMeta[] = [
+  // empty 类预设：没有内容、没有搜索结果或首次进入时的空态。
   {
     id: "empty-collection",
     slug: "empty-collection-state",
@@ -73,6 +84,7 @@ export const stateBlockMetaList: StateBlockMeta[] = [
       secondaryAction: { label: "View example" },
     },
   },
+  // loading 类预设：数据、工作区或导入任务尚未完成时的过渡状态。
   {
     id: "loading-table",
     slug: "loading-table-state",
@@ -128,6 +140,7 @@ export const stateBlockMetaList: StateBlockMeta[] = [
       primaryAction: { label: "View tasks" },
     },
   },
+  // error 类预设：局部失败、整页失败或离线错误。
   {
     id: "inline-error",
     slug: "inline-error-state",
@@ -188,6 +201,7 @@ export const stateBlockMetaList: StateBlockMeta[] = [
       primaryAction: { label: "Try again" },
     },
   },
+  // permission 类预设：无权限、角色受限或登录态失效。
   {
     id: "no-permission",
     slug: "no-permission-state",
@@ -247,6 +261,7 @@ export const stateBlockMetaList: StateBlockMeta[] = [
       primaryAction: { label: "Sign in again" },
     },
   },
+  // upgrade 类预设：功能受套餐限制、试用即将结束或配额达到上限。
   {
     id: "upgrade-plan",
     slug: "upgrade-plan-state",
@@ -307,6 +322,7 @@ export const stateBlockMetaList: StateBlockMeta[] = [
       secondaryAction: { label: "View usage" },
     },
   },
+  // success 类预设：任务完成、邀请成功或发布成功后的反馈。
   {
     id: "task-success",
     slug: "task-success-state",
@@ -370,6 +386,11 @@ export const stateBlockMetaList: StateBlockMeta[] = [
     },
   },
 ];
+
+/**
+ * 首批重点展示的预设 id。
+ * 一般用于首页推荐、示例优先级或发版阶段的重点能力说明。
+ */
 export const priorityStateBlockIds = [
   "empty-search",
   "no-permission",
@@ -378,6 +399,11 @@ export const priorityStateBlockIds = [
   "task-success",
   "first-project",
 ] as const satisfies readonly ImplementedBlockId[];
+
+/**
+ * 当前仓库里已经实现的全部 preset id。
+ * 保留这个列表是为了在“规划中但尚未交付”的场景出现时仍能区分已实现范围。
+ */
 export const implementedBlockIds = [
   "empty-collection",
   "empty-search",
@@ -398,16 +424,28 @@ export const implementedBlockIds = [
   "invite-success",
   "publish-success",
 ] as const satisfies readonly ImplementedBlockId[];
+
+/** 方便按 id 直接取元数据，避免每次都线性遍历列表。 */
 export const stateBlockMetaById = Object.fromEntries(
   stateBlockMetaList.map((meta) => [meta.id, meta]),
 ) as Record<StateBlockId, StateBlockMeta>;
+
+/** docs 和路由场景更常按 slug 检索，所以单独维护一份索引。 */
 export const stateBlockMetaBySlug = Object.fromEntries(
   stateBlockMetaList.map((meta) => [meta.slug, meta]),
 ) as Record<string, StateBlockMeta>;
+
+/** 已排序的重点预设详情列表，供界面直接消费。 */
 export const priorityStateBlocks = priorityStateBlockIds.map(
   (id) => stateBlockMetaById[id],
 );
+
 const implementedBlockSet = new Set<string>(implementedBlockIds);
+
+/**
+ * 运行时类型守卫。
+ * 主要用于把来自路由、配置或外部输入的字符串收窄为已实现的 preset id。
+ */
 export function isImplementedBlockId(
   value: string,
 ): value is ImplementedBlockId {

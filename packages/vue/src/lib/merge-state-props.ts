@@ -1,3 +1,10 @@
+/**
+ * 把调用方传入的覆盖 props 与组件默认值合并成统一可渲染的结构。
+ *
+ * 这里有一个关键细节：
+ * - `undefined` 代表“调用方没有干预”，应继续沿用默认值；
+ * - `null` 只对 action 生效，代表“调用方明确要求把这个按钮移除”。
+ */
 import { computed } from "vue";
 import type { BaseStateProps } from "@statekit-vue/shared";
 import type { PresetStateBlockProps } from "../types";

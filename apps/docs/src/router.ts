@@ -8,7 +8,9 @@ import PermissionsAndUpgradeView from "./views/examples/PermissionsAndUpgradeVie
 import TaskFlowView from "./views/examples/TaskFlowView.vue";
 
 export default createRouter({
-  history: createWebHistory(),
+  // 跟随 Vite 的 BASE_URL，当前在 Vercel 根路径部署时会是 "/"
+  // 以后如果切到子路径部署，只需要改 Vite base，不必再改路由代码。
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: "/", component: HomeView },
     { path: "/recipes", component: RecipesView },
