@@ -1,5 +1,22 @@
 # StateKit Changelog
 
+Canonical handoff notes now live in [`docs/交接/CHANGELOG.md`](./docs/%E4%BA%A4%E6%8E%A5/CHANGELOG.md).
+
+## 2026-04-16 Release Prep (0.2.1)
+
+### Changed
+
+- Prepared `@statekit-vue/shared` and `@statekit-vue/vue` for the `0.2.1` patch release.
+- Aligned workspace consumers on the `0.2.1` line for docs and example verification.
+- Carried the latest design refresh into release prep, including the example/docs de-carding work and shared illustration fixes for error, permission, and success states.
+
+### Verified
+
+- `npm run typecheck`
+- `npm run build`
+- `npm run pack:check`
+- `npm run smoke:install`
+
 ## 2026-04-06 Release (0.2.0)
 
 ### Added
@@ -25,36 +42,3 @@
 - Published `@statekit-vue/shared@0.2.0`.
 - Published `@statekit-vue/vue@0.2.0`.
 - Confirmed both packages expose `0.2.0` on npm after release.
-
-### Verified
-
-- `npm run typecheck`
-- `npm run build`
-- `npm run pack:check`
-- `npm run smoke:install`
-- `npm view @statekit-vue/shared version`
-- `npm view @statekit-vue/vue version`
-
-## 2026-04-02 Release (0.1.2)
-
-### Changed
-
-- Published `@statekit-vue/shared@0.1.2` and `@statekit-vue/vue@0.1.2`.
-- Finalized the CTA action object with `label`, `href`, `onClick`, `loading`, `loadingLabel`, and `disabled`.
-- Added explicit `null` handling for `primaryAction` and `secondaryAction` so preset buttons can be removed intentionally.
-- Updated docs, examples, and package pages to match the action API and install flow at the time of release.
-
-### Verified
-
-- `npm run typecheck`
-- `npm run build`
-- `npm run pack:check`
-- `npm run smoke:install`
-
-## 2026-04-02 Patch Release Prep (0.1.1)
-
-### Changed
-
-- Bumped `@statekit-vue/shared` from `0.1.0` to `0.1.1`.
-- Bumped `@statekit-vue/vue` from `0.1.0` to `0.1.1` and aligned its dependency on `@statekit-vue/shared` to `0.1.1`.
-- Updated the docs app, example app, and lockfile so the workspace resolved against the `0.1.1` line before publish.

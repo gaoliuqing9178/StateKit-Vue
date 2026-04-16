@@ -117,25 +117,23 @@ border-radius:50%}
 /* 各类别默认插画的细节差异。 */
 .sk-figure--empty .sk-figure__panel{transform:rotate(-7deg)}
 .sk-figure--empty .sk-figure__panel.is-back{transform:translate(12px,-12px) rotate(8deg) scale(.92)}
-.sk-figure__cross,.sk-figure__check{left:32px;
-top:46px;
-width:32px;
+.sk-figure__cross,.sk-figure__check{width:32px;
 height:4px;
 border-radius:var(--sk-radius-pill);
 background:var(--sk-accent);
 transform-origin:center}
-.sk-figure__cross{transform:rotate(45deg)}
+.sk-figure__cross{left:50%;
+top:50%;
+margin-left:-16px;
+margin-top:-2px;
+transform:rotate(45deg)}
 .sk-figure__cross.is-secondary{transform:rotate(-45deg)}
-.sk-figure__lock-body{left:31px;
-top:44px;
-width:34px;
+.sk-figure__lock-body{width:34px;
 height:26px;
 border-radius:12px;
 background:var(--sk-accent);
 box-shadow:0 10px 18px color-mix(in srgb,var(--sk-accent) 24%,transparent)}
-.sk-figure__lock-arch{left:38px;
-top:28px;
-width:20px;
+.sk-figure__lock-arch{width:20px;
 height:20px;
 border:5px solid var(--sk-accent);
 border-bottom:none;
@@ -145,6 +143,14 @@ right:16px;
 bottom:22px;
 left:16px}
 .sk-figure--permission .sk-figure__panel.is-back{transform:translate(10px,-8px) scale(.9)}
+.sk-figure--permission .sk-figure__lock-body{left:50%;
+top:43px;
+margin-left:-17px}
+.sk-figure--permission .sk-figure__lock-arch{left:50%;
+top:28px;
+width:24px;
+height:18px;
+margin-left:-12px}
 .sk-figure__spark{left:42px;
 top:18px;
 width:16px;

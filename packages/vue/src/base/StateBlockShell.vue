@@ -148,7 +148,6 @@ function handleActionClick(action: RenderedAction, event: MouseEvent) {
               <span class="sk-figure__badge" />
               <span class="sk-figure__check" />
               <span class="sk-figure__check is-secondary" />
-              <span class="sk-figure__shadow-line" />
             </div>
             <div v-else class="sk-figure sk-figure--empty">
               <span class="sk-figure__panel" />
