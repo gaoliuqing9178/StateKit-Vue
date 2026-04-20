@@ -45,10 +45,16 @@
 ## P1 短期应推进
 
 - [x] 为关键 UI 增加最小可用的自动化回归测试
-  建议先做最小闭环，不要一次铺太大：
-  1. 为 `StateBlockShell` 增加 DOM 级断言，覆盖 `layout`、`tone`、`primaryAction`、`secondaryAction`、`href`、`loading`、`disabled`、`null`。
-  2. 为 docs 关键路由增加截图级或快照级回归，至少覆盖一个 `inline`、一个 `panel`、一个 `page` 场景。
-  完成标准：未来再改 CTA 或布局样式时，能自动发现明显回归。
+  这轮已经完成最小闭环，分两层收口：
+  1. 浏览器级：新增 `playwright.config.ts` 与 `apps/docs/tests/admin-empty-states.spec.ts`，覆盖 docs 中一个 `inline`、一个 `panel`、一个 `page` 场景的 CTA 交互与布局语义。
+  2. 组件级：新增 `vitest.config.ts`、`packages/vue/src/base/StateBlockShell.test.ts`、`packages/vue/src/base/StatePresetBlock.test.ts`，覆盖 CTA button/link 分流、loading/disabled 语义、`null`/`undefined` merge 差异，以及 unsupported layout fallback。
+  已通过校验：
+  ```bash
+  npm run test:unit
+  npm run test:ui
+  npm run typecheck
+  ```
+  完成标准：未来再改 CTA、布局或 preset merge 逻辑时，能自动发现明显回归。
 
 - [x] 扩充 example 场景，而不是继续堆 Block 数量
   建议新增方向：多步骤任务流、权限受限后升级、数据为空后的首个成功闭环。

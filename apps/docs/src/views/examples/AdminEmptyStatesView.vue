@@ -124,7 +124,7 @@ const setupChecks = computed(() => [
       </div>
 
       <div class="demo-grid demo-grid--two">
-        <article class="demo-surface">
+        <article class="demo-surface" data-testid="inline-empty-state-demo">
           <div class="demo-surface__header">
             <div>
               <p class="demo-surface__eyebrow">Task</p>
@@ -180,7 +180,7 @@ const setupChecks = computed(() => [
           </ul>
         </article>
 
-        <article class="demo-surface">
+        <article class="demo-surface" data-testid="panel-empty-state-demo">
           <div class="demo-surface__header">
             <div>
               <p class="demo-surface__eyebrow">Task</p>
@@ -223,7 +223,7 @@ const setupChecks = computed(() => [
           </ul>
         </article>
 
-        <article class="demo-surface demo-surface--span-2">
+        <article class="demo-surface demo-surface--span-2" data-testid="page-empty-state-demo">
           <div class="demo-surface__header">
             <div>
               <p class="demo-surface__eyebrow">Task</p>

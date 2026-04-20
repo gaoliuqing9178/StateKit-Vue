@@ -1,6 +1,23 @@
 # StateKit Changelog
 
-## 2026-04-16 Release Prep (0.2.1)
+## 2026-04-20 UI Test Coverage (Unreleased)
+
+### Added
+
+- Added `playwright.config.ts` plus `apps/docs/tests/admin-empty-states.spec.ts` to cover one `inline`, one `panel`, and one `page` docs scenario at the browser level.
+- Added `vitest.config.ts`, `packages/vue/src/base/StateBlockShell.test.ts`, and `packages/vue/src/base/StatePresetBlock.test.ts` to cover CTA semantics, preset merge behavior, and unsupported layout fallback at the component level.
+
+### Changed
+
+- Added stable `data-testid` hooks to `apps/docs/src/views/examples/AdminEmptyStatesView.vue` so the docs example page can act as a reliable browser-level regression surface without changing the public package API.
+
+### Verified
+
+- `npm run test:unit`
+- `npm run test:ui`
+- `npm run typecheck`
+
+## 2026-04-16 Release (0.2.1)
 
 ### Changed
 
@@ -8,12 +25,20 @@
 - Bumped `@statekit-vue/vue` from `0.2.0` to `0.2.1` and aligned its dependency on `@statekit-vue/shared` to `0.2.1`.
 - Aligned `apps/docs` and `examples/vite-vue-admin` on the `0.2.1` workspace line for release verification.
 
+### Published
+
+- Published `@statekit-vue/shared@0.2.1`.
+- Published `@statekit-vue/vue@0.2.1`.
+- Confirmed the `0.2.1` release has been completed.
+
 ### Verified
 
 - `npm run typecheck`
 - `npm run build`
 - `npm run pack:check`
 - `npm run smoke:install`
+- `npm run test:unit`
+- `npm run test:ui`
 
 ## 2026-04-16 Design Refresh (Unreleased)
 

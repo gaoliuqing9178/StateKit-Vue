@@ -6,6 +6,12 @@
 
 StateKit 专注处理产品里那些高频出现、却最容易被临时拼凑的状态界面：empty、loading、error、permission、upgrade 和 success。它不是按钮库、表单库，也不是完整设计系统，而是专门解决“状态页与流程节点”这一层的问题。
 
+## 演示
+
+<img src="./Eg/image1.png" alt='eg' />
+
+<img src="./Eg/image.png" alt='eg' />
+
 ## 在线文档
 
 - 在线 docs：https://state-kit-vue-docs.vercel.app/
@@ -170,7 +176,7 @@ npm run smoke:install
 ## 文档与发布说明
 
 - 进入 [`docs/`](./docs) 查看内部规划与规范文档
-- 进入 [`CHANGELOG.md`](./CHANGELOG.md) 查看版本化发布说明
+- 进入 [`CHANGELOG.md`](./docs/交接/CHANGELOG.md) 查看版本化发布说明
 
 ## 适用边界
 

@@ -19,13 +19,19 @@
     "build": "npm run build --workspace @statekit-vue/shared && npm run build --workspace @statekit-vue/vue && npm run build --workspace @statekit/docs && npm run build --workspace @statekit/example-vite-vue-admin",
     "typecheck": "npm run typecheck --workspace @statekit-vue/shared && npm run typecheck --workspace @statekit-vue/vue && npm run typecheck --workspace @statekit/docs && npm run typecheck --workspace @statekit/example-vite-vue-admin",
     "pack:check": "npm pack --workspace @statekit-vue/shared --json --dry-run && npm pack --workspace @statekit-vue/vue --json --dry-run",
-    "smoke:install": "node ./scripts/smoke-install.mjs"
+    "smoke:install": "node ./scripts/smoke-install.mjs",
+    "test:ui": "playwright test",
+    "test:unit": "vitest run"
   },
   "devDependencies": {
+    "@playwright/test": "^1.54.2",
     "@types/node": "^20.0.0",
     "@vitejs/plugin-vue": "^5.0.0",
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^26.1.0",
     "typescript": "^5.0.0",
     "vite": "^5.0.0",
+    "vitest": "^2.1.9",
     "vue": "^3.4.0",
     "vue-router": "^4.3.0",
     "vue-tsc": "^2.0.0"

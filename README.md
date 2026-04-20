@@ -6,6 +6,12 @@ Category-first state UI for SaaS products built with Vue.
 
 StateKit focuses on the product states teams rebuild constantly but rarely standardize well: empty, loading, error, permission, upgrade, and success. It is not a button kit, form kit, or general design system. It is a narrow layer for product-grade state surfaces and workflow checkpoints.
 
+## Example
+
+<img src="./Eg/image1.png" alt="eg" />
+
+<img src="./Eg/image.png" alt="eg" />
+
 ## Online Docs
 
 - Docs site: https://state-kit-vue-docs.vercel.app/
@@ -170,7 +176,7 @@ npm run smoke:install
 ## Docs And Release Notes
 
 - Read internal planning and specs in [`docs/`](./docs)
-- See versioned release notes in [`CHANGELOG.md`](./CHANGELOG.md)
+- See versioned release notes in [`CHANGELOG.md`](./docs/交接/CHANGELOG.md)
 
 ## Positioning
 
