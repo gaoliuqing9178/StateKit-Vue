@@ -69,19 +69,42 @@ export const stateBlockMetaList: StateBlockMeta[] = [
     slug: "first-project-state",
     componentName: "EmptyState",
     category: "empty",
-    summary: "Use as an onboarding-ready first-run state for a workspace.",
+    summary:
+      "Use when a workspace exists but the team has not created its first project yet.",
     priority: "launch",
     featured: true,
     supportedLayouts: panelAndPage,
     defaults: {
       title: "Create your first project",
       description:
-        "Start with a project space to organize files, teammates, and tasks.",
+        "Start with one project to organize tasks, assets, and approvals inside this workspace.",
       tone: "brand",
       density: "spacious",
       layout: "page",
       primaryAction: { label: "Create project" },
       secondaryAction: { label: "View example" },
+    },
+  },
+  // onboarding 类预设：首次进入产品时的启动、激活与初始配置。
+  {
+    id: "onboarding-workspace",
+    slug: "onboarding-workspace-state",
+    componentName: "OnboardingState",
+    category: "onboarding",
+    summary:
+      "Use as the first-run activation state before a team creates its first workspace.",
+    priority: "launch",
+    featured: true,
+    supportedLayouts: panelAndPage,
+    defaults: {
+      title: "Create your first workspace",
+      description:
+        "Start with one shared workspace to organize projects, teammates, and review flows from day one.",
+      tone: "brand",
+      density: "spacious",
+      layout: "page",
+      primaryAction: { label: "Create workspace" },
+      secondaryAction: { label: "View setup guide" },
     },
   },
   // loading 类预设：数据、工作区或导入任务尚未完成时的过渡状态。
@@ -393,6 +416,7 @@ export const stateBlockMetaList: StateBlockMeta[] = [
  */
 export const priorityStateBlockIds = [
   "empty-search",
+  "onboarding-workspace",
   "no-permission",
   "upgrade-plan",
   "page-error",
@@ -408,6 +432,7 @@ export const implementedBlockIds = [
   "empty-collection",
   "empty-search",
   "first-project",
+  "onboarding-workspace",
   "loading-table",
   "loading-workspace",
   "loading-import",

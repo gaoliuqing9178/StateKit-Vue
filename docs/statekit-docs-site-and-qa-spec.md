@@ -20,7 +20,7 @@
 | `/recipes` | Recipe 总览列表页 |
 | `/recipes/:slug` | 单个 Recipe 详情页，包含 live preview、元数据、代码片段 |
 | `/docs/installation` | 安装与最小接入说明 |
-| `/examples/admin-empty-states` | 示例页，展示空状态在后台中的组合 |
+| `/examples/admin-empty-states` | 示例页，展示 empty 与 onboarding 状态在后台中的组合 |
 | `/examples/permissions-and-upgrade` | 示例页，展示权限与升级场景 |
 | `/examples/task-flow` | 示例页，展示 loading / error / success 流程串联 |
 
@@ -36,17 +36,17 @@
 
 现有首页已经有这套基本骨架，后续维护时不要把首页改成纯 marketing copy，而失去产品导航功能。
 
-### Block 列表页
+### Recipe 列表页
 
-Block 列表页必须：
+Recipe 列表页必须：
 
 - 覆盖全部 `stateBlockMetaList`。
 - 明确展示类别、标题、摘要和支持布局。
 - 允许使用者快速比较相似场景，例如 `page-error` 和 `inline-error`。
 
-### Block 详情页
+### Recipe 详情页
 
-每个 Block 详情页至少包含：
+每个 Recipe 详情页至少包含：
 
 - 标题与摘要
 - live preview
@@ -112,12 +112,13 @@ Block 列表页必须：
 
 ## 建议的 QA 场景矩阵
 
-每次视觉或结构改动时，至少人工检查以下六类代表 Block：
+每次视觉或结构改动时，至少人工检查以下几类代表 Block：
 
 | 代表 Block | 检查重点 |
 | --- | --- |
 | `empty-search` | 空结果语义是否清晰，`inline/panel/page` 是否都成立 |
-| `first-project` | `page + spacious + brand` 是否足够像 onboarding 入口 |
+| `onboarding-workspace` | `page + spacious + brand` 是否足够像首次启动入口，而不是普通 empty state |
+| `first-project` | 是否已经更清楚地表达“工作区已存在，但还没有首个项目” |
 | `page-error` | 整页错误是否有明确恢复动作 |
 | `no-permission` | `warning` 语气是否准确，不像系统崩溃 |
 | `upgrade-plan` | 商业引导是否自然，不像广告 Banner |

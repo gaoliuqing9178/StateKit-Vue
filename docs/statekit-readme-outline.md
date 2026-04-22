@@ -28,7 +28,7 @@ Scenario-first state UI building blocks for SaaS products built with Vue.
 ```md
 # StateKit
 
-面向 SaaS 产品的场景化状态界面组件库，专注 empty / loading / error / permission / upgrade / success 等状态。
+面向 SaaS 产品的场景化状态界面组件库，专注 empty / onboarding / loading / error / permission / upgrade / success 等状态。
 ```
 
 ### 2. 什么是 StateKit
@@ -44,13 +44,14 @@ Scenario-first state UI building blocks for SaaS products built with Vue.
 建议用一组简短 bullets：
 
 - Empty states
+- Onboarding states
 - Loading states
 - Error states
 - Permission states
 - Upgrade states
 - Success states
 
-并补一句：onboarding first-run 场景当前通过 `first-project` 这类 empty state 处理。
+并补一句：`OnboardingState` 现在负责 first-run 激活，`first-project` 则保留为 empty 类别里的兼容过渡 recipe。
 
 ### 4. 快速开始
 
@@ -71,9 +72,10 @@ import { EmptyState } from "@statekit-vue/vue";
 
 ### 5. 典型组件示例
 
-推荐展示 3 到 4 个高价值类别入口，而不是把 18 个 recipe 全部塞进 README：
+推荐展示 3 到 4 个高价值类别入口，而不是把 19 个 recipe 全部塞进 README：
 
 - `EmptyState`
+- `OnboardingState`
 - `PermissionState`
 - `UpgradeState`
 - `SuccessState`
@@ -106,7 +108,7 @@ npm run build
 
 建议直接链接或说明：
 
-- docs 站点用于查看全部 Block 与安装说明
+- docs 站点用于查看全部 recipe 与安装说明
 - example 工程用于看集成效果
 - `docs/` 目录用于内部产品与实现文档
 

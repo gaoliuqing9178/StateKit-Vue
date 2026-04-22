@@ -4,9 +4,19 @@ import { RouterLink } from "vue-router";
 import { allRecipeDocs, featuredRecipeDocs } from "../lib/recipe-docs";
 import { examplePages, homeCopy } from "../lib/copy";
 
+const categoryOrder = [
+  "empty",
+  "onboarding",
+  "loading",
+  "error",
+  "permission",
+  "upgrade",
+  "success",
+] as const;
+
 const heroStats = computed(() => [
   {
-    value: "06",
+    value: String(categoryOrder.length).padStart(2, "0"),
     label: "Category entries",
   },
   {
@@ -21,7 +31,9 @@ const heroStats = computed(() => [
 
 const categoryDescriptions = {
   empty:
-    "First-run onboarding, empty searches, and blank collections that need the next move.",
+    "Blank collections and empty searches that still need a clear next move.",
+  onboarding:
+    "First-run activation and setup moments before the team reaches the real workspace.",
   loading:
     "Processing states that keep structure visible while the system catches up.",
   error:
@@ -35,13 +47,11 @@ const categoryDescriptions = {
 } as const;
 
 const categoryOverview = computed(() =>
-  (["empty", "loading", "error", "permission", "upgrade", "success"] as const).map(
-    (category) => ({
-      category,
-      count: allRecipeDocs.filter((recipe) => recipe.category === category).length,
-      description: categoryDescriptions[category],
-    }),
-  ),
+  categoryOrder.map((category) => ({
+    category,
+    count: allRecipeDocs.filter((recipe) => recipe.category === category).length,
+    description: categoryDescriptions[category],
+  })),
 );
 
 const featuredRecipes = computed(() => featuredRecipeDocs.slice(0, 4));
@@ -58,8 +68,14 @@ const featuredRecipes = computed(() => featuredRecipeDocs.slice(0, 4));
           <p class="hero-lead">{{ homeCopy.description }}</p>
 
           <div class="button-row button-row--hero">
-            <RouterLink class="button-link" to="/recipes">Browse recipes</RouterLink>
-            <RouterLink class="button-link is-secondary" to="/docs/installation">
+            <RouterLink class="button-link" data-testid="home-browse-recipes" to="/recipes">
+              Browse recipes
+            </RouterLink>
+            <RouterLink
+              class="button-link is-secondary"
+              data-testid="home-open-installation"
+              to="/docs/installation"
+            >
               Installation
             </RouterLink>
           </div>
@@ -77,8 +93,8 @@ const featuredRecipes = computed(() => featuredRecipeDocs.slice(0, 4));
             <p>Shared metadata</p>
             <strong>Category-first components</strong>
             <span>
-              Six public entries backed by 18 preset recipes across empty,
-              loading, error, permission, upgrade, and success.
+              Seven public entries backed by 19 preset recipes across empty,
+              onboarding, loading, error, permission, upgrade, and success.
             </span>
           </div>
 
@@ -175,6 +191,7 @@ const featuredRecipes = computed(() => featuredRecipeDocs.slice(0, 4));
           v-for="(page, index) in examplePages"
           :key="page.href"
           class="editorial-link"
+          :data-testid="`home-example-link-${page.href.split('/').pop()}`"
           :to="page.href"
         >
           <span class="editorial-link__index">0{{ index + 1 }}</span>

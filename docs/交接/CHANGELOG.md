@@ -1,5 +1,25 @@
 # StateKit Changelog
 
+## 2026-04-22 Onboarding Category Pilot (Unreleased)
+
+### Added
+
+- Added `OnboardingState` as the seventh category-first public entry and introduced `onboarding-workspace` as the first dedicated onboarding recipe.
+- Added `packages/vue/src/blocks/onboarding/OnboardingState.test.ts` so the onboarding entry now has explicit coverage for default rendering and override behavior.
+
+### Changed
+
+- Reframed `first-project` as an empty-state bridge for workspaces that already exist but still have no project, instead of treating it as the primary onboarding surface.
+- Updated the shared shell, docs app, and `examples/vite-vue-admin` so the public product story now reads as `7` category-first entries backed by `19` preset recipes.
+
+### Verified
+
+- `npm run typecheck`
+- `npm run build`
+- `npm run test:unit`
+- `npm run test:ui`
+- `npm run pack:check`
+
 ## 2026-04-20 UI Test Coverage (Unreleased)
 
 ### Added

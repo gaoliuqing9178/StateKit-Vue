@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [vue()],
   test: {
     environment: "jsdom",
-    include: ["packages/vue/src/**/*.test.ts"],
+    include: ["packages/**/*.test.ts"],
   },
   resolve: {
     alias: {

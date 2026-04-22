@@ -4,17 +4,20 @@ import {
   EmptyState,
   ErrorState,
   LoadingState,
+  OnboardingState,
   PermissionState,
   SuccessState,
   UpgradeState,
 } from "@statekit-vue/vue";
 
 const activeFilters = ref(["Status: Needs review", "Owner: Motion"]);
+const onboardingStarts = ref(2);
 const savedViews = ref(4);
 const accessRequests = ref(2);
 const billingIntents = ref(3);
 const releaseNotes = ref(6);
 const retryCount = ref(0);
+const onboardingPending = ref(false);
 const accessPending = ref(false);
 const billingPending = ref(false);
 const retryPending = ref(false);
@@ -31,6 +34,13 @@ function clearFilters() {
 
 function saveView() {
   savedViews.value += 1;
+}
+
+async function startWorkspaceSetup() {
+  onboardingPending.value = true;
+  await wait(880);
+  onboardingStarts.value += 1;
+  onboardingPending.value = false;
 }
 
 async function requestAccess() {
@@ -179,6 +189,44 @@ const summaryCards = computed(() => [
         <div class="example-band__intro">
           <div class="example-band__meta">
             <p class="example-band__index">Example 02</p>
+            <span class="example-band__tag">OnboardingState</span>
+          </div>
+          <h2>Onboarding that starts the workspace before the first empty list</h2>
+          <p>
+            This category keeps first-run activation separate from generic empty
+            states. The surface is still calm, but the message is about starting
+            the product, not recovering from missing content.
+          </p>
+          <p id="workspace-guide" class="example-band__footnote">
+            Workspace setups started from this example: {{ onboardingStarts }}
+          </p>
+        </div>
+
+        <div class="example-band__stage demo-theme demo-theme--mist">
+          <OnboardingState
+            tone="brand"
+            layout="page"
+            density="compact"
+            title="Create the first workspace for the motion team"
+            description="Start one shared space for briefs, reviewers, and launch approvals before the library begins to fill up."
+            :primary-action="{
+              label: 'Start workspace setup',
+              onClick: startWorkspaceSetup,
+              loading: onboardingPending,
+              loadingLabel: 'Preparing workspace...',
+            }"
+            :secondary-action="{
+              label: 'Read setup guide',
+              href: '#workspace-guide',
+            }"
+          />
+        </div>
+      </section>
+
+      <section class="example-band">
+        <div class="example-band__intro">
+          <div class="example-band__meta">
+            <p class="example-band__index">Example 03</p>
             <span class="example-band__tag">LoadingState</span>
           </div>
           <h2>Loading state as a quiet queue marker</h2>
@@ -213,7 +261,7 @@ const summaryCards = computed(() => [
       <section class="example-band">
         <div class="example-band__intro">
           <div class="example-band__meta">
-            <p class="example-band__index">Example 03</p>
+            <p class="example-band__index">Example 04</p>
             <span class="example-band__tag">PermissionState</span>
           </div>
           <h2>Permission state with one clear next step</h2>
@@ -247,7 +295,7 @@ const summaryCards = computed(() => [
       <section class="example-band">
         <div class="example-band__intro">
           <div class="example-band__meta">
-            <p class="example-band__index">Example 04</p>
+            <p class="example-band__index">Example 05</p>
             <span class="example-band__tag">UpgradeState</span>
           </div>
           <h2>Upgrade state framed like a product decision</h2>
@@ -285,7 +333,7 @@ const summaryCards = computed(() => [
       <section class="example-band">
         <div class="example-band__intro">
           <div class="example-band__meta">
-            <p class="example-band__index">Example 05</p>
+            <p class="example-band__index">Example 06</p>
             <span class="example-band__tag">ErrorState</span>
           </div>
           <h2>Error state with restrained urgency</h2>
@@ -322,7 +370,7 @@ const summaryCards = computed(() => [
       <section class="example-band example-band--full">
         <div class="example-band__intro">
           <div class="example-band__meta">
-            <p class="example-band__index">Example 06</p>
+            <p class="example-band__index">Example 07</p>
             <span class="example-band__tag">SuccessState</span>
           </div>
           <h2>Success state with room to land, then move on</h2>

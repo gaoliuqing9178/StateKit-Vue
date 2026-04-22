@@ -9,7 +9,7 @@ export const homeCopy = {
   eyebrow: "Category-first State UI",
   title: "Category-first state components for Vue teams",
   description:
-    "StateKit gives Vue teams six public state categories with one shared API, backed by 18 preset recipes for empty, loading, error, permission, upgrade, and success moments.",
+    "StateKit gives Vue teams seven public state categories with one shared API, backed by 19 preset recipes for empty, onboarding, loading, error, permission, upgrade, and success moments.",
 };
 export const installationSteps = [
   "Install `@statekit-vue/vue` in the Vue 3.4+ workspace that renders the category components.",
@@ -20,9 +20,9 @@ export const installationSteps = [
 export const examplePages = [
   {
     href: "/examples/admin-empty-states",
-    title: "Admin Empty States",
+    title: "Admin Setup And Empty States",
     description:
-      "Interactive empty states showing inline search recovery, async collection creation, and first-run onboarding setup.",
+      "Interactive empty and onboarding states showing inline search recovery, async collection creation, and first-run workspace setup.",
   },
   {
     href: "/examples/permissions-and-upgrade",

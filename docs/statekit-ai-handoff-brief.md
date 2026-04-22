@@ -2,7 +2,7 @@
 
 ## 项目一句话
 
-StateKit 是一个面向 SaaS 产品的 category-first 状态 UI 组件库，当前以 Vue 3 为主，聚焦 empty / loading / error / permission / upgrade / success 这类状态页与流程节点。
+StateKit 是一个面向 SaaS 产品的 category-first 状态 UI 组件库，当前以 Vue 3 为主，聚焦 empty / onboarding / loading / error / permission / upgrade / success 这类状态页与流程节点。
 
 ## 当前仓库事实
 
@@ -14,22 +14,23 @@ StateKit 是一个面向 SaaS 产品的 category-first 状态 UI 组件库，当
 
 ## 当前实现方式
 
-- 公开 API 已经收敛到 6 个 category-first 入口：`EmptyState`、`LoadingState`、`ErrorState`、`PermissionState`、`UpgradeState`、`SuccessState`。
-- 底层仍保留 18 个 preset recipes；旧场景名组件继续作为 deprecated compatibility exports 保留。
+- 公开 API 已经收敛到 7 个 category-first 入口：`EmptyState`、`OnboardingState`、`LoadingState`、`ErrorState`、`PermissionState`、`UpgradeState`、`SuccessState`。
+- 底层仍保留 19 个 preset recipes；旧场景名组件继续作为 deprecated compatibility exports 保留。
 - Vue 层核心渲染逻辑集中在 `StatePresetBlock` 和 `StateBlockShell`。
 - docs 站直接读取 shared 元数据，shared 变更会同步影响 docs 展示与示例代码。
 
 ## 当前版本状态
 
 - npm 上最新已发布版本：
-  - `@statekit-vue/shared@0.2.0`
-  - `@statekit-vue/vue@0.2.0`
-- 本地 workspace 当前已提升到 `0.2.1`，用于准备下一次 patch 发布。
+  - `@statekit-vue/shared@0.2.1`
+  - `@statekit-vue/vue@0.2.1`
+- 本地 workspace 当前仍在 `0.2.1` 版本线，但已经包含未发版的 onboarding category pilot。
 
 ## 最近已经完成的工作
 
 - example 已完成第一轮视觉重做，方向是更安静、更开放的 editorial layout，而不是 admin 卡片墙。
 - docs 示例页和 docs 站外层样式已一起收口，整体持续减少卡片感。
+- onboarding 已作为独立 category 试点引入，当前先提供 `OnboardingState` 和 `onboarding-workspace` 这条完整链路。
 - 共享插图细节已修正：
   - success 去掉 shadow line
   - error cross 改成真正居中
@@ -63,6 +64,7 @@ StateKit 是一个面向 SaaS 产品的 category-first 状态 UI 组件库，当
 ## 不要误判的地方
 
 - StateKit 不是通用组件库。
+- onboarding 已经是独立 category，不要再默认把 first-run 激活语义塞回 `empty`。
 - 当前没有第三个 CTA，也没有复杂 slot 系统。
 - docs 站不是 marketing site，而是产品文档和 QA 工具。
 - 当前没有自动化视觉回归；很多视觉调整仍需要人工检查 docs/example。
@@ -76,7 +78,7 @@ StateKit 是一个面向 SaaS 产品的 category-first 状态 UI 组件库，当
 
 ## 当前优先方向
 
-- 完成 `0.2.1` patch 发包
+- 验证 onboarding category pilot 的语义、文档和示例是否足够顺手
 - 继续收 docs/example 的外层视觉，减少卡片感，但不要把站点做成纯 marketing page
 - 给 `error` / `permission` / `success` 这些插图补更稳的视觉回归
 - 持续维持 README、package README、launch checklist、handoff notes 的口径一致

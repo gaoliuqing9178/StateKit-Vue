@@ -110,7 +110,7 @@ const reviewNotes = computed(() => [
       </div>
 
       <div class="demo-grid demo-grid--two">
-        <article class="demo-surface">
+        <article class="demo-surface" data-testid="request-access-demo">
           <div class="demo-surface__header">
             <div>
               <p class="demo-surface__eyebrow">Task</p>
@@ -139,7 +139,7 @@ const reviewNotes = computed(() => [
           />
         </article>
 
-        <article class="demo-surface">
+        <article class="demo-surface" data-testid="session-recovery-demo">
           <div class="demo-surface__header">
             <div>
               <p class="demo-surface__eyebrow">Task</p>
@@ -165,7 +165,7 @@ const reviewNotes = computed(() => [
           />
         </article>
 
-        <article class="demo-surface demo-surface--span-2">
+        <article class="demo-surface demo-surface--span-2" data-testid="approval-routing-demo">
           <div class="demo-surface__header">
             <div>
               <p class="demo-surface__eyebrow">Task</p>
@@ -197,7 +197,7 @@ const reviewNotes = computed(() => [
           />
         </article>
 
-        <article class="demo-surface demo-surface--span-2">
+        <article class="demo-surface demo-surface--span-2" data-testid="quota-review-demo">
           <div class="demo-surface__header">
             <div>
               <p class="demo-surface__eyebrow">Review checklist</p>

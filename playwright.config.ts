@@ -1,10 +1,11 @@
 import { defineConfig, devices } from "@playwright/test";
 
-process.env.PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
-
 export default defineConfig({
   testDir: "./apps/docs/tests",
   timeout: 30_000,
+  forbidOnly: Boolean(process.env.CI),
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
   expect: {
     timeout: 5_000,
   },
@@ -12,9 +13,6 @@ export default defineConfig({
   use: {
     baseURL: "http://127.0.0.1:4173",
     trace: "on-first-retry",
-    launchOptions: {
-      executablePath: "C:/Users/lx8nb/.cache/ms-playwright/chrome-win/chrome.exe",
-    },
   },
   webServer: {
     command:

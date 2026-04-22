@@ -4,7 +4,7 @@ Category-first state UI for SaaS products built with Vue.
 
 [简体中文](./README.zh-CN.md)
 
-StateKit focuses on the product states teams rebuild constantly but rarely standardize well: empty, loading, error, permission, upgrade, and success. It is not a button kit, form kit, or general design system. It is a narrow layer for product-grade state surfaces and workflow checkpoints.
+StateKit focuses on the product states teams rebuild constantly but rarely standardize well: empty, onboarding, loading, error, permission, upgrade, and success. It is not a button kit, form kit, or general design system. It is a narrow layer for product-grade state surfaces and workflow checkpoints.
 
 ## Example
 
@@ -20,18 +20,19 @@ StateKit focuses on the product states teams rebuild constantly but rarely stand
 
 ## What StateKit Ships
 
-StateKit currently exposes six public category-first components:
+StateKit currently exposes seven public category-first components:
 
 - `EmptyState`
+- `OnboardingState`
 - `LoadingState`
 - `ErrorState`
 - `PermissionState`
 - `UpgradeState`
 - `SuccessState`
 
-Those public entries are backed by 18 preset recipes across the same six categories. Older scenario-specific exports such as `EmptySearchState` and `OfflineErrorState` still exist as deprecated compatibility exports, so existing integrations can migrate gradually.
+Those public entries are backed by 19 preset recipes across the same seven categories. Older scenario-specific exports such as `EmptySearchState` and `OfflineErrorState` still exist as deprecated compatibility exports, so existing integrations can migrate gradually.
 
-Onboarding-style moments still live inside the empty-state category through first-run recipes such as `FirstProjectState`.
+Onboarding now ships as its own category through `OnboardingState`. The older `FirstProjectState` preset still exists, but it now reads as a post-setup empty-state bridge rather than the primary onboarding surface.
 
 ## Quick Start
 

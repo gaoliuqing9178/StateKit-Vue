@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * `StateBlockShell` 是 Vue 包里真正负责渲染 UI 的统一壳组件。
- * 六个类别入口组件和所有旧场景包装组件，最终都会收敛到这里。
+ * 七个类别入口组件和所有旧场景包装组件，最终都会收敛到这里。
  *
  * 维护建议：
  * 1. 如果要调整按钮可访问性、布局切换、图形占位符或交互细节，优先改这里。
@@ -109,7 +109,17 @@ function handleActionClick(action: RenderedAction, event: MouseEvent) {
         <div class="sk-shell__media-frame">
           <slot name="media">
             <div
-              v-if="props.category === 'loading'"
+              v-if="props.category === 'onboarding'"
+              class="sk-figure sk-figure--onboarding"
+            >
+              <span class="sk-figure__panel" />
+              <span class="sk-figure__panel is-back" />
+              <span class="sk-figure__path" />
+              <span class="sk-figure__path-dot" />
+              <span class="sk-figure__path-dot is-target" />
+            </div>
+            <div
+              v-else-if="props.category === 'loading'"
               class="sk-figure sk-figure--loading"
             >
               <span class="sk-figure__ring" />

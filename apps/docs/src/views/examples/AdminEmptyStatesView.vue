@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { EmptyState } from "@statekit-vue/vue";
+import { EmptyState, OnboardingState } from "@statekit-vue/vue";
 
 const activeFilters = ref([
   "Campaign: Spring relaunch",
@@ -84,7 +84,7 @@ const adminMetrics = computed(() => [
 const setupChecks = computed(() => [
   "Inline empty states work best when the surrounding table chrome still matters.",
   "Panel empty states can hide their preset secondary CTA by passing `:secondary-action=\"null\"`.",
-  "First-run onboarding benefits from a wide page layout plus a loading label that explains what the primary CTA is doing.",
+  "The dedicated onboarding entry keeps first-run setup separate from the generic empty-state family.",
 ]);
 </script>
 
@@ -94,18 +94,18 @@ const setupChecks = computed(() => [
       <div class="demo-shell__header">
         <div>
           <p class="demo-kicker">Example</p>
-          <h1>Admin Empty States</h1>
+          <h1>Admin Setup And Empty States</h1>
           <p>
             A content operations workspace rewritten around the current
             category-first API: inline recovery for empty search results, a
             single-CTA collection setup flow, and a first-run onboarding page
-            with a real loading button.
+            with a dedicated public entry plus a real loading button.
           </p>
         </div>
         <div class="demo-chip-row" aria-label="Scenario tags">
           <span class="demo-chip">Inline recovery</span>
           <span class="demo-chip">Single CTA with null</span>
-          <span class="demo-chip">Loading label</span>
+          <span class="demo-chip">Onboarding entry</span>
         </div>
       </div>
 
@@ -223,25 +223,28 @@ const setupChecks = computed(() => [
           </ul>
         </article>
 
-        <article class="demo-surface demo-surface--span-2" data-testid="page-empty-state-demo">
+        <article
+          class="demo-surface demo-surface--span-2"
+          data-testid="page-onboarding-state-demo"
+        >
           <div class="demo-surface__header">
             <div>
               <p class="demo-surface__eyebrow">Task</p>
-              <h2>Use the first-run preset as a true onboarding decision point</h2>
+              <h2>Use the onboarding entry as a true workspace activation step</h2>
               <p>
-                This page layout keeps the first action large and explicit. The
-                primary CTA uses a custom loading label, while the secondary CTA
-                remains a real link into the setup guide.
+                This page layout separates first-run setup from generic empty
+                states. The primary CTA uses a custom loading label, while the
+                secondary CTA remains a real link into the setup guide.
               </p>
             </div>
-            <span class="demo-badge">EmptyState</span>
+            <span class="demo-badge">OnboardingState</span>
           </div>
 
-          <EmptyState
+          <OnboardingState
             layout="page"
             density="spacious"
             title="Open the workspace with one launch stream"
-            description="Create the first project, connect owners, and give reviewers a single place to approve assets."
+            description="Create the workspace, connect owners, and give reviewers a single place to approve assets from day one."
             :primary-action="{
               label: 'Start workspace setup',
               onClick: startWorkspaceSetup,

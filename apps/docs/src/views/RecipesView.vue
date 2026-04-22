@@ -5,6 +5,7 @@ import { allRecipeDocs } from "../lib/recipe-docs";
 
 const categoryLabels = {
   empty: "Empty",
+  onboarding: "Onboarding",
   loading: "Loading",
   error: "Error",
   permission: "Permission",
@@ -13,7 +14,8 @@ const categoryLabels = {
 } as const;
 
 const categoryDescriptions = {
-  empty: "Blank collections, empty searches, and first-run starting points.",
+  empty: "Blank collections and empty searches that still need the next step.",
+  onboarding: "First-run activation states that start the workspace before content exists.",
   loading: "States that hold structure while content is still arriving.",
   error: "Failures that need retry, recovery, or a safe way out.",
   permission: "Access restrictions tied to role, resource, or session state.",
@@ -22,14 +24,22 @@ const categoryDescriptions = {
 } as const;
 
 const categorySections = computed(() =>
-  (["empty", "loading", "error", "permission", "upgrade", "success"] as const).map(
-    (category) => ({
-      category,
-      label: categoryLabels[category],
-      description: categoryDescriptions[category],
-      recipes: allRecipeDocs.filter((recipe) => recipe.category === category),
-    }),
-  ),
+  (
+    [
+      "empty",
+      "onboarding",
+      "loading",
+      "error",
+      "permission",
+      "upgrade",
+      "success",
+    ] as const
+  ).map((category) => ({
+    category,
+    label: categoryLabels[category],
+    description: categoryDescriptions[category],
+    recipes: allRecipeDocs.filter((recipe) => recipe.category === category),
+  })),
 );
 
 const launchRecipeCount = computed(
@@ -44,7 +54,7 @@ const launchRecipeCount = computed(
         <p class="eyebrow">Recipe Index</p>
         <h1>Preset recipes by state category</h1>
         <p>
-          Browse all 18 preset recipes, compare adjacent moments inside the same
+          Browse all 19 preset recipes, compare adjacent moments inside the same
           category, and see which public category entry each recipe resolves
           through.
         </p>
@@ -80,11 +90,12 @@ const launchRecipeCount = computed(
         <span class="meta-pill meta-pill--solid">{{ section.recipes.length }} recipes</span>
       </div>
 
-      <div class="block-list">
+      <div class="block-list" :data-testid="`recipe-list-${section.category}`">
         <RouterLink
           v-for="recipe in section.recipes"
           :key="recipe.id"
           class="block-list__item"
+          :data-testid="`recipe-link-${recipe.slug}`"
           :to="'/recipes/' + recipe.slug"
         >
           <div class="block-list__main">

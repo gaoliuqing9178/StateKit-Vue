@@ -113,7 +113,7 @@ H:\lilProject
 ### 3. 在 docs 站接入
 
 - `apps/docs/src/lib/block-components.ts` 中加入新组件映射。
-- 确认通过 `stateBlockMetaList` 能在 Block 列表页自动出现。
+- 确认通过 `stateBlockMetaList` 能在 recipe 列表页自动出现。
 - 验证详情页路由使用的 `slug` 正确可访问。
 
 ### 4. 在示例工程中校验
@@ -156,7 +156,7 @@ npm run build
 建议的日常改动流程：
 
 1. 修改 `shared` 或 `vue`。
-2. 打开 docs 站检查 Block 列表页和详情页。
+2. 打开 docs 站检查 recipe 列表页和详情页。
 3. 打开 example 工程看集成效果。
 4. 运行 `npm run typecheck` 与 `npm run build`。
 

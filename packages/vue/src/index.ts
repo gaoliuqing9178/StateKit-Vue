@@ -11,6 +11,7 @@ import EmptyStateComponent from "./blocks/empty/EmptyState.vue";
 import EmptyCollectionStateComponent from "./blocks/empty/EmptyCollectionState.vue";
 import EmptySearchStateComponent from "./blocks/empty/EmptySearchState.vue";
 import FirstProjectStateComponent from "./blocks/empty/FirstProjectState.vue";
+import OnboardingStateComponent from "./blocks/onboarding/OnboardingState.vue";
 import LoadingStateComponent from "./blocks/loading/LoadingState.vue";
 import LoadingTableStateComponent from "./blocks/loading/LoadingTableState.vue";
 import LoadingWorkspaceStateComponent from "./blocks/loading/LoadingWorkspaceState.vue";
@@ -35,6 +36,8 @@ import PublishSuccessStateComponent from "./blocks/success/PublishSuccessState.v
 export const StateBlockShell: typeof StateBlockShellComponent =
   StateBlockShellComponent;
 export const EmptyState: typeof EmptyStateComponent = EmptyStateComponent;
+export const OnboardingState: typeof OnboardingStateComponent =
+  OnboardingStateComponent;
 export const LoadingState: typeof LoadingStateComponent = LoadingStateComponent;
 export const ErrorState: typeof ErrorStateComponent = ErrorStateComponent;
 export const PermissionState: typeof PermissionStateComponent =

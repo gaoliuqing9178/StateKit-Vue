@@ -32,6 +32,7 @@ describe("StatePresetBlock", () => {
     });
 
     expect(wrapper.get(".sk-shell__title").text()).toBe("You do not have access");
+    expect(wrapper.get(".sk-shell").attributes("data-category")).toBe("permission");
     expect(wrapper.get(".sk-shell").attributes("data-layout")).toBe("panel");
     expect(wrapper.get(".sk-shell__action").text()).toBe("Request access");
     expect(wrapper.findAll(".sk-shell__action")).toHaveLength(1);
@@ -57,5 +58,22 @@ describe("StatePresetBlock", () => {
     expect(wrapper.get(".sk-shell").attributes("data-density")).toBe("compact");
     expect(wrapper.get(".sk-shell__action").text()).toBe("Launch now");
     expect(wrapper.findAll(".sk-shell__action")).toHaveLength(2);
+  });
+
+  it("passes through supported layouts without warning and keeps the metadata category", () => {
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+
+    const wrapper = mount(StatePresetBlock, {
+      props: {
+        blockId: "session-expired",
+        layout: "page",
+      },
+    });
+
+    expect(wrapper.get(".sk-shell").attributes("data-category")).toBe("permission");
+    expect(wrapper.get(".sk-shell").attributes("data-layout")).toBe("page");
+    expect(wrapper.get(".sk-shell").attributes("data-tone")).toBe("warning");
+    expect(wrapper.get(".sk-shell").attributes("data-density")).toBe("cozy");
+    expect(warnSpy).not.toHaveBeenCalled();
   });
 });

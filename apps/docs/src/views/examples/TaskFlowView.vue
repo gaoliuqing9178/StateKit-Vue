@@ -102,7 +102,7 @@ const taskRows = computed(() => [
       </div>
 
       <div class="demo-grid demo-grid--two">
-        <article class="demo-surface">
+        <article class="demo-surface" data-testid="loading-task-demo">
           <div class="demo-surface__header">
             <div>
               <p class="demo-surface__eyebrow">Task</p>
@@ -128,7 +128,7 @@ const taskRows = computed(() => [
           />
         </article>
 
-        <article class="demo-surface">
+        <article class="demo-surface" data-testid="inline-error-demo">
           <div class="demo-surface__header">
             <div>
               <p class="demo-surface__eyebrow">Task</p>
@@ -173,7 +173,7 @@ const taskRows = computed(() => [
           />
         </article>
 
-        <article class="demo-surface demo-surface--span-2">
+        <article class="demo-surface demo-surface--span-2" data-testid="success-handoff-demo">
           <div class="demo-surface__header">
             <div>
               <p class="demo-surface__eyebrow">Task</p>
@@ -199,7 +199,11 @@ const taskRows = computed(() => [
           />
         </article>
 
-        <article class="demo-surface demo-surface--span-2" id="validation-rules">
+        <article
+          class="demo-surface demo-surface--span-2"
+          id="validation-rules"
+          data-testid="publish-summary-demo"
+        >
           <div class="demo-surface__header">
             <div>
               <p class="demo-surface__eyebrow">Follow-up</p>

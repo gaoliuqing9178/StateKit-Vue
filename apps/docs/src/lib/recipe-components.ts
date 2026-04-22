@@ -8,6 +8,7 @@
 import type { Component } from "vue";
 import {
   EmptyState,
+  OnboardingState,
   LoadingState,
   ErrorState,
   PermissionState,
@@ -19,6 +20,7 @@ export const recipeComponentMap: Record<string, Component> = {
   EmptyCollectionState: EmptyState,
   EmptySearchState: EmptyState,
   FirstProjectState: EmptyState,
+  OnboardingState,
   LoadingState,
   LoadingTableState: LoadingState,
   LoadingWorkspaceState: LoadingState,

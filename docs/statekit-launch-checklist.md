@@ -1,13 +1,13 @@
 # StateKit Launch Checklist
 
-这份清单用于 StateKit 对外发布前的最后收口。当前这一版按 `0.2.1` patch 发包准备状态维护。
+这份清单用于 StateKit 对外发布前的最后收口。当前这一版按 `0.2.1` 发布后的未发版功能维护状态更新。
 
 ## 1. 产品范围确认
 
 - [x] 一句话定位保持为“面向 SaaS 产品的 category-first 状态 UI 组件库”
 - [x] 当前只对外承诺 Vue 3 支持，不暗示 React 或多框架
-- [x] 公开主入口仍然是 6 个 category-first 组件
-- [x] onboarding 仍通过 empty 类别里的 first-run recipes 表达，不是独立类别
+- [x] 公开主入口已经扩到 7 个 category-first 组件
+- [x] onboarding 已作为独立类别试点引入，不再默认混在 empty 里
 
 ## 2. 包结构与导出
 
@@ -27,13 +27,14 @@
 
 - [x] 首页、recipes、recipe detail、installation 和 examples 页面都仍可构建
 - [x] docs 示例页已同步第一轮“去卡片化”视觉收口
+- [x] docs 首页、recipes 和 recipe detail 已同步 onboarding category 的 7 类口径
 - [ ] 人工浏览 docs 首页、`/recipes`、`/recipes/:slug` 和三个 example 页
 - [ ] 人工检查移动端留白、分隔线、hover 强度和 CTA 节奏
 
 ## 5. Example 工程准备
 
 - [x] `examples/vite-vue-admin` 已改成更开放的 editorial layout 示例页
-- [x] 示例页继续使用 6 个 category-first 入口，不依赖旧场景名 API
+- [x] 示例页已覆盖 7 个 category-first 入口，不依赖旧场景名 API
 - [ ] 人工确认 example 页在桌面和移动端都没有视觉失衡
 
 ## 6. 共享图形检查
@@ -52,11 +53,11 @@
 
 ## 8. npm 发布状态
 
-- [x] npm 上最新已发布版本仍是 `0.2.0`
-- [x] 本地 workspace 当前版本线已提升到 `0.2.1`
-- [ ] 发布 `@statekit-vue/shared@0.2.1`
-- [ ] 发布 `@statekit-vue/vue@0.2.1`
-- [ ] 发布后确认两个包的 `latest` dist-tag 指向 `0.2.1`
+- [x] npm 上最新已发布版本是 `0.2.1`
+- [x] 本地 workspace 当前版本线仍是 `0.2.1`
+- [ ] 为 onboarding category pilot 决定下一次版本号
+- [ ] 发布包含 onboarding category 的下一次版本
+- [ ] 发布后确认两个包的 `latest` dist-tag 指向新的版本号
 
 ## 9. 发布后跟进
 

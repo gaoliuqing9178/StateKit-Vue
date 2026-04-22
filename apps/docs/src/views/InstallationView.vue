@@ -52,7 +52,7 @@ const consistencyNotes = [
         <h1>Start with one category component, then change only the product language.</h1>
         <p>
           StateKit is meant to be low-decision: one package, one stylesheet, and
-          six public entries on top of shared recipe defaults.
+          seven public entries on top of shared recipe defaults.
         </p>
       </div>
 

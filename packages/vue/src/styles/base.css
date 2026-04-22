@@ -80,7 +80,7 @@ box-shadow:inset 0 1px #ffffffa6}
 .sk-figure{position:relative;
 width:96px;
 height:96px}
-.sk-figure__panel,.sk-figure__badge,.sk-figure__ring,.sk-figure__lock-body,.sk-figure__lock-arch,.sk-figure__spark,.sk-figure__cross,.sk-figure__check,.sk-figure__shadow-line{position:absolute}
+.sk-figure__panel,.sk-figure__badge,.sk-figure__ring,.sk-figure__lock-body,.sk-figure__lock-arch,.sk-figure__spark,.sk-figure__cross,.sk-figure__check,.sk-figure__shadow-line,.sk-figure__path,.sk-figure__path-dot{position:absolute}
 .sk-figure__panel{top:22px;
 right:12px;
 bottom:18px;
@@ -117,6 +117,30 @@ border-radius:50%}
 /* 各类别默认插画的细节差异。 */
 .sk-figure--empty .sk-figure__panel{transform:rotate(-7deg)}
 .sk-figure--empty .sk-figure__panel.is-back{transform:translate(12px,-12px) rotate(8deg) scale(.92)}
+.sk-figure__path{left:24px;
+right:24px;
+top:52px;
+height:4px;
+border-radius:var(--sk-radius-pill);
+background:color-mix(in srgb,var(--sk-accent) 26%,white)}
+.sk-figure__path-dot{width:12px;
+height:12px;
+top:48px;
+left:18px;
+border-radius:50%;
+background:var(--sk-accent);
+box-shadow:0 10px 18px color-mix(in srgb,var(--sk-accent) 24%,transparent)}
+.sk-figure__path-dot.is-target{left:auto;
+right:16px;
+background:#ffffffeb;
+border:3px solid var(--sk-accent);
+box-shadow:0 10px 18px color-mix(in srgb,var(--sk-accent) 16%,transparent)}
+.sk-figure--onboarding .sk-figure__panel{top:22px;
+right:14px;
+bottom:18px;
+left:14px;
+background:linear-gradient(180deg,#fffffff2,#ffffffd1),linear-gradient(180deg,var(--sk-accent-soft),transparent)}
+.sk-figure--onboarding .sk-figure__panel.is-back{transform:translate(10px,-10px) scale(.92)}
 .sk-figure__cross,.sk-figure__check{width:32px;
 height:4px;
 border-radius:var(--sk-radius-pill);
@@ -279,13 +303,15 @@ flex-direction:column}
 .sk-shell__action{width:100%}
 }
 
-/* 类别级背景细节，避免六类状态只靠一处颜色切换显得过于单薄。 */
+/* 类别级背景细节，避免不同状态只靠一处颜色切换显得过于单薄。 */
 .sk-shell[data-category=empty]{background:radial-gradient(circle at top right,#fffffff5,#ffffffd1),linear-gradient(180deg,#fff,#f8fbff)}
+.sk-shell[data-category=onboarding]{background:radial-gradient(circle at top right,#fffffff5,#ffffffd1),linear-gradient(180deg,#fff,#f4f8ff)}
 .sk-shell[data-category=loading]{background:radial-gradient(circle at top right,#fffffff5,#ffffffd6),linear-gradient(180deg,#fff,#f6f9ff)}
 .sk-shell[data-category=error]{background:radial-gradient(circle at top right,#fffffff5,#ffffffd1),linear-gradient(180deg,#fff,#fff7f7)}
 .sk-shell[data-category=permission]{background:radial-gradient(circle at top right,#fffffff5,#ffffffd1),linear-gradient(180deg,#fff,#fffaf4)}
 .sk-shell[data-category=upgrade]{background:radial-gradient(circle at top right,#fffffff5,#ffffffd1),linear-gradient(180deg,#fff,#f5f8ff)}
 .sk-shell[data-category=success]{background:radial-gradient(circle at top right,#fffffff5,#ffffffd1),linear-gradient(180deg,#fff,#f6fff8)}
+.sk-shell[data-category=onboarding] .sk-shell__media-frame{background:radial-gradient(circle at top,rgba(255,255,255,.9),transparent 62%),linear-gradient(160deg,#dbeafeeb,#ffffffe0)}
 .sk-shell[data-category=error] .sk-shell__media-frame{background:radial-gradient(circle at top,rgba(255,255,255,.9),transparent 62%),linear-gradient(160deg,#fee2e2eb,#ffffffe0)}
 .sk-shell[data-category=permission] .sk-shell__media-frame{background:radial-gradient(circle at top,rgba(255,255,255,.9),transparent 62%),linear-gradient(160deg,#ffedd5f0,#ffffffe0)}
 .sk-shell[data-category=upgrade] .sk-shell__media-frame{background:radial-gradient(circle at top,rgba(255,255,255,.9),transparent 62%),linear-gradient(160deg,#dbeafef5,#ffffffe0)}

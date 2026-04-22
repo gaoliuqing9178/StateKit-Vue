@@ -34,7 +34,9 @@ const route = useRoute();
 
 const categoryCustomizationGuide = {
   empty:
-    "Rewrite the copy so the user understands what is missing, why the screen is empty, and what they should create or clear next.",
+    "Rewrite the copy so the user understands what is missing, why the surface is still empty, and what they should create or clear next.",
+  onboarding:
+    "Keep the message activation-shaped. Good onboarding copy explains the first setup action plainly and makes the next step feel safe, not overwhelming.",
   loading:
     "Keep the title and description procedural. Loading recipes work best when they confirm progress and avoid adding unnecessary secondary actions.",
   error:
@@ -354,7 +356,7 @@ const relatedRecipes = computed(() => {
       </section>
 
       <section class="detail-layout">
-        <article class="detail-preview">
+        <article class="detail-preview" data-testid="recipe-detail-preview">
           <div class="detail-preview__header">
             <div>
               <p class="detail-preview__eyebrow">Live preview</p>
@@ -368,13 +370,13 @@ const relatedRecipes = computed(() => {
             </div>
           </div>
 
-          <div class="detail-preview__surface">
+          <div class="detail-preview__surface" data-testid="recipe-detail-live-preview">
             <component :is="recipeComponent" v-bind="recipeMeta.defaults" />
           </div>
         </article>
 
         <div class="detail-info-grid">
-          <section class="detail-section">
+          <section class="detail-section" data-testid="recipe-detail-metadata">
             <h2>Metadata</h2>
             <dl class="detail-definition-list">
               <div>

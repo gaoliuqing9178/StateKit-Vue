@@ -2,7 +2,7 @@
 
 Category-first Vue state UI for SaaS products.
 
-`@statekit-vue/vue` is the main public package for StateKit. Install it when your app needs production-ready empty, loading, error, permission, upgrade, and success states without rebuilding layout, copy structure, and CTA behavior from scratch.
+`@statekit-vue/vue` is the main public package for StateKit. Install it when your app needs production-ready empty, onboarding, loading, error, permission, upgrade, and success states without rebuilding layout, copy structure, and CTA behavior from scratch.
 
 ## Install
 
@@ -54,13 +54,13 @@ async function handleClearFilters() {
 
 ## What It Includes
 
-- Six category-first public components: `EmptyState`, `LoadingState`, `ErrorState`, `PermissionState`, `UpgradeState`, and `SuccessState`
-- 18 preset recipes and compatibility exports across the same six categories
+- Seven category-first public components: `EmptyState`, `OnboardingState`, `LoadingState`, `ErrorState`, `PermissionState`, `UpgradeState`, and `SuccessState`
+- 19 preset recipes and compatibility exports across the same seven categories
 - Shared prop surface for `title`, `description`, `tone`, `density`, `layout`, `primaryAction`, and `secondaryAction`
 - Built-in stylesheet entry at `@statekit-vue/vue/styles.css`
 - Re-exports from `@statekit-vue/shared` for recipe metadata and shared types
 
-Onboarding-style entry points currently live inside the empty-state category through first-run presets such as `FirstProjectState`.
+`OnboardingState` is now the dedicated first-run activation entry. `FirstProjectState` still exists for compatibility, but it now reads as a post-setup empty-state bridge rather than the primary onboarding surface.
 Prefer the unified category entries in new code and customize the copy, layout, and actions per screen. Older scenario-specific exports remain available as deprecated compatibility presets.
 
 ## Shared Preset API

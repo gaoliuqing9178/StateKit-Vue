@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test.describe("Admin empty states example", () => {
+test.describe("Admin setup and empty states example", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/examples/admin-empty-states");
   });
@@ -40,8 +40,8 @@ test.describe("Admin empty states example", () => {
     await expect(demo.getByText("Starter collection created. The page keeps the empty state visible here so the docs page can continue demonstrating the single-CTA pattern.")).toBeVisible();
   });
 
-  test("keeps page layout CTA split between button and link", async ({ page }) => {
-    const demo = page.getByTestId("page-empty-state-demo");
+  test("keeps onboarding page CTA split between button and link", async ({ page }) => {
+    const demo = page.getByTestId("page-onboarding-state-demo");
     const primaryAction = demo.getByRole("button", { name: "Start workspace setup" });
     const secondaryAction = demo.getByRole("link", { name: "Read setup checklist" });
 
