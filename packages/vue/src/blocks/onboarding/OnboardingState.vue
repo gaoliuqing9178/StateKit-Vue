@@ -10,17 +10,21 @@ import { useMergedStateProps } from "../../lib/merge-state-props";
 import type { PresetStateBlockProps } from "../../types";
 
 const props = defineProps<PresetStateBlockProps>();
+const slots = defineSlots<{
+  media?: () => unknown;
+  actions?: () => unknown;
+}>();
 
 // 这组默认值代表 onboarding 的推荐起点：先完成第一步激活，再进入真实内容流。
 const defaultProps: BaseStateProps = {
-  title: "Create your first workspace",
+  title: "Welcome to your launch workspace",
   description:
-    "Start with one shared workspace to organize projects, teammates, and review flows from day one.",
+    "Bring projects, approvals, and teammates into one guided flow so the team can start shipping without rebuilding the basics.",
   tone: "brand",
   density: "spacious",
   layout: "page",
-  primaryAction: { label: "Create workspace" },
-  secondaryAction: { label: "View setup guide" },
+  primaryAction: { label: "Start guided setup" },
+  secondaryAction: { label: "Watch quick walkthrough" },
 };
 
 // 调用方只覆盖自己的产品文案和动作，其余视觉结构继续沿用 onboarding 默认语义。
@@ -28,5 +32,15 @@ const mergedProps = useMergedStateProps(props, defaultProps);
 </script>
 
 <template>
-  <StateBlockShell v-bind="mergedProps" category="onboarding" />
+  <Transition appear name="sk-onboarding-transition">
+    <StateBlockShell v-bind="mergedProps" category="onboarding">
+      <template v-if="slots.media" #media>
+        <slot name="media" />
+      </template>
+
+      <template v-if="slots.actions" #actions>
+        <slot name="actions" />
+      </template>
+    </StateBlockShell>
+  </Transition>
 </template>

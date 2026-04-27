@@ -35,13 +35,13 @@ const categoryEntryCases = [
     name: "OnboardingState",
     component: OnboardingState,
     category: "onboarding",
-    title: "Create your first workspace",
+    title: "Welcome to your launch workspace",
     description:
-      "Start with one shared workspace to organize projects, teammates, and review flows from day one.",
+      "Bring projects, approvals, and teammates into one guided flow so the team can start shipping without rebuilding the basics.",
     tone: "brand",
     density: "spacious",
     layout: "page",
-    actions: ["Create workspace", "View setup guide"],
+    actions: ["Start guided setup", "Watch quick walkthrough"],
   },
   {
     name: "ErrorState",

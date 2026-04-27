@@ -158,6 +158,7 @@ const featuredRecipes = computed(() => featuredRecipeDocs.slice(0, 4));
           v-for="recipe in featuredRecipes"
           :key="recipe.id"
           class="feature-item"
+          :data-testid="`home-featured-recipe-${recipe.slug}`"
           :to="'/recipes/' + recipe.slug"
         >
           <div class="feature-item__copy">
@@ -208,7 +209,7 @@ const featuredRecipes = computed(() => featuredRecipeDocs.slice(0, 4));
         <p class="eyebrow">Start</p>
         <h2>Install one category component, then rewrite only the product copy.</h2>
       </div>
-      <RouterLink class="button-link" to="/docs/installation">
+      <RouterLink class="button-link" data-testid="home-bottom-installation" to="/docs/installation">
         Open installation guide
       </RouterLink>
     </section>

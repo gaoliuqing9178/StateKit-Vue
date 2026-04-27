@@ -1,5 +1,18 @@
 # StateKit Changelog
 
+## 2026-04-23 Packaging Cleanup (Unreleased)
+
+### Changed
+
+- Excluded `*.test.ts` files from the shared and Vue package build tsconfig so test sources no longer emit into `dist`.
+- Added a package-level prebuild cleanup step that removes stale `dist` output before rebuilding, so old test artifacts cannot leak into the next npm tarball.
+
+### Verified
+
+- `npm run typecheck`
+- `npm run build`
+- `npm run pack:check`
+
 ## 2026-04-22 Onboarding Category Pilot (Unreleased)
 
 ### Added

@@ -78,6 +78,7 @@ const consistencyNotes = [
           v-for="section in installSections"
           :key="section.index"
           class="install-step"
+          :data-testid="`installation-step-${section.index}`"
         >
           <span class="install-step__index">{{ section.index }}</span>
           <div class="install-step__body">
@@ -112,7 +113,9 @@ const consistencyNotes = [
           </ol>
         </section>
 
-        <RouterLink class="button-link" to="/recipes">Browse preset recipes</RouterLink>
+        <RouterLink class="button-link" data-testid="installation-browse-recipes" to="/recipes">
+          Browse preset recipes
+        </RouterLink>
       </aside>
     </section>
   </section>

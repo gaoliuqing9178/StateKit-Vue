@@ -108,6 +108,19 @@ const actionFieldDocs = [
   },
 ] as const;
 
+const onboardingSlotDocs = [
+  {
+    name: "#media",
+    description:
+      "Use for richer onboarding visuals such as product mockups, GIFs, or video. It replaces the small default onboarding figure only for `OnboardingState`.",
+  },
+  {
+    name: "#actions",
+    description:
+      "Use when the default two-button pattern is not enough and the page needs tutorial links, demo-data entry points, or a low-priority skip affordance.",
+  },
+] as const;
+
 const recipeMeta = computed(() =>
   getRecipeDocBySlug(String(route.params.slug ?? "")),
 );
@@ -512,6 +525,34 @@ const relatedRecipes = computed(() => {
         </div>
       </section>
 
+      <section
+        v-if="recipeMeta.category === 'onboarding'"
+        class="section-card section-card--outline"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Slots</p>
+            <h2>Rich onboarding media and action areas</h2>
+          </div>
+          <p>
+            `OnboardingState` also exposes two optional named slots for richer
+            hero experiences. The page still owns visibility, skip behavior,
+            and any persistence rules outside the component.
+          </p>
+        </div>
+
+        <div class="detail-doc-grid">
+          <section
+            v-for="slotDoc in onboardingSlotDocs"
+            :key="slotDoc.name"
+            class="detail-section detail-section--doc"
+          >
+            <h3>{{ slotDoc.name }}</h3>
+            <p>{{ slotDoc.description }}</p>
+          </section>
+        </div>
+      </section>
+
       <section class="section-card section-card--outline">
         <div class="section-heading">
           <div>
@@ -590,6 +631,7 @@ const relatedRecipes = computed(() => {
             v-for="item in relatedRecipes"
             :key="item.id"
             class="editorial-link"
+            :data-testid="`recipe-related-${item.slug}`"
             :to="'/recipes/' + item.slug"
           >
             <span class="editorial-link__index">{{ item.category }}</span>
@@ -602,7 +644,7 @@ const relatedRecipes = computed(() => {
       </section>
     </template>
 
-    <section v-else class="section-card section-card--empty">
+    <section v-else class="section-card section-card--empty" data-testid="recipe-detail-missing">
       <p class="eyebrow">Missing</p>
       <h1>Recipe not found</h1>
       <p>The requested slug does not match any recipe in the shared metadata.</p>

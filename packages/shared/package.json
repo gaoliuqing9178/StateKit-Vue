@@ -42,6 +42,7 @@
     "access": "public"
   },
   "scripts": {
+    "prebuild": "node ../../scripts/clean-dist.mjs ./dist",
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.build.json --noEmit"
   }

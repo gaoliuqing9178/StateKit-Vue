@@ -4,6 +4,7 @@ import RecipesView from "./views/RecipesView.vue";
 import RecipeDetailView from "./views/RecipeDetailView.vue";
 import InstallationView from "./views/InstallationView.vue";
 import AdminEmptyStatesView from "./views/examples/AdminEmptyStatesView.vue";
+import OnboardingActivationView from "./views/examples/OnboardingActivationView.vue";
 import PermissionsAndUpgradeView from "./views/examples/PermissionsAndUpgradeView.vue";
 import TaskFlowView from "./views/examples/TaskFlowView.vue";
 
@@ -21,6 +22,11 @@ export default createRouter({
       redirect: (to) => `/recipes/${String(to.params.slug ?? "")}`,
     },
     { path: "/docs/installation", component: InstallationView },
+    { path: "/examples", redirect: "/examples/onboarding-activation" },
+    {
+      path: "/examples/onboarding-activation",
+      component: OnboardingActivationView,
+    },
     { path: "/examples/admin-empty-states", component: AdminEmptyStatesView },
     {
       path: "/examples/permissions-and-upgrade",

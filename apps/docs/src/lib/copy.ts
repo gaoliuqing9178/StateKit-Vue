@@ -19,10 +19,16 @@ export const installationSteps = [
 ];
 export const examplePages = [
   {
-    href: "/examples/admin-empty-states",
-    title: "Admin Setup And Empty States",
+    href: "/examples/onboarding-activation",
+    title: "Onboarding Activation",
     description:
-      "Interactive empty and onboarding states showing inline search recovery, async collection creation, and first-run workspace setup.",
+      "Hero-style onboarding with rich media, layered action slots, and lifecycle controlled entirely by the host page.",
+  },
+  {
+    href: "/examples/admin-empty-states",
+    title: "Admin Empty States",
+    description:
+      "Interactive empty states showing inline search recovery and a quieter single-CTA collection setup flow.",
   },
   {
     href: "/examples/permissions-and-upgrade",

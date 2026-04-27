@@ -52,6 +52,7 @@
     "@statekit-vue/shared": "0.2.1"
   },
   "scripts": {
+    "prebuild": "node ../../scripts/clean-dist.mjs ./dist",
     "build": "vite build && vue-tsc -p tsconfig.build.json",
     "typecheck": "vue-tsc --noEmit -p tsconfig.json"
   }

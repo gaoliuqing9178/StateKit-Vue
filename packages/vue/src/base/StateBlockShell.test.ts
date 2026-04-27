@@ -21,6 +21,34 @@ describe("StateBlockShell", () => {
     expect(actions[1].attributes("href")).toBe("/docs/installation");
   });
 
+  it("keeps the default onboarding figure decorative when no custom media slot is provided", () => {
+    const wrapper = mount(StateBlockShell, {
+      props: {
+        title: "Welcome",
+        category: "onboarding",
+      },
+    });
+
+    expect(wrapper.get(".sk-shell__media").attributes("aria-hidden")).toBe("true");
+  });
+
+  it("exposes a custom media slot to assistive tech instead of hiding the whole media region", () => {
+    const wrapper = mount(StateBlockShell, {
+      props: {
+        title: "Welcome",
+        category: "onboarding",
+      },
+      slots: {
+        media: '<div data-testid="hero-media">Interactive launch preview</div>',
+      },
+    });
+
+    expect(wrapper.get('[data-testid="hero-media"]').text()).toBe(
+      "Interactive launch preview",
+    );
+    expect(wrapper.get(".sk-shell__media").attributes("aria-hidden")).toBeUndefined();
+  });
+
   it("blocks unavailable button actions and exposes loading semantics", async () => {
     const onClick = vi.fn();
     const wrapper = mount(StateBlockShell, {
@@ -102,5 +130,28 @@ describe("StateBlockShell", () => {
     await wrapper.get(".sk-shell__action").trigger("click");
 
     expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("lets the actions slot replace the fallback CTA rendering", () => {
+    const wrapper = mount(StateBlockShell, {
+      props: {
+        title: "Launch onboarding",
+        primaryAction: { label: "Default start" },
+        secondaryAction: { label: "Default guide" },
+      },
+      slots: {
+        actions:
+          '<div data-testid="custom-actions"><button type="button">Launch now</button><button type="button">Skip for now</button></div>',
+      },
+    });
+
+    expect(wrapper.get('[data-testid="custom-actions"]').text()).toContain(
+      "Launch now",
+    );
+    expect(wrapper.get('[data-testid="custom-actions"]').text()).toContain(
+      "Skip for now",
+    );
+    expect(wrapper.text()).not.toContain("Default start");
+    expect(wrapper.text()).not.toContain("Default guide");
   });
 });

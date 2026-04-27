@@ -21,12 +21,6 @@
   检查点：`OnboardingState` 的图形、标题节奏、CTA 层级、移动端按钮堆叠、以及它和 `EmptyState` / `first-project` 的语义边界是否足够清楚。
   完成标准：从首页到详情页到示例页，用户能直观看出“onboarding 不是 generic empty state”。
 
-- [ ] 清理发包内容，避免测试产物继续进入 npm tarball
-  当前现象：`npm run pack:check` 能通过，但包内容里仍包含 `*.test.*` 相关产物。
-  目标：让发布包只保留真正需要给消费方的运行时、类型和 README 文件。
-  重点关注：`packages/shared`、`packages/vue` 的构建输出范围与 `files` / 打包入口配置。
-  完成标准：重新执行 `npm run pack:check` 后，tarball 内容不再带测试产物。
-
 - [ ] 在最终发版前重新跑完整发布链路
   命令：
   ```bash

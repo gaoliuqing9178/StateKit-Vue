@@ -17,10 +17,15 @@ const accessRequests = ref(2);
 const billingIntents = ref(3);
 const releaseNotes = ref(6);
 const retryCount = ref(0);
+const onboardingVisible = ref(true);
+const demoWorkspaceSeeded = ref(false);
 const onboardingPending = ref(false);
 const accessPending = ref(false);
 const billingPending = ref(false);
 const retryPending = ref(false);
+const onboardingStatusNote = ref(
+  "The example page owns onboarding visibility. The component only renders the launch hero and its richer slots.",
+);
 
 function wait(ms: number) {
   return new Promise<void>((resolve) => {
@@ -41,6 +46,28 @@ async function startWorkspaceSetup() {
   await wait(880);
   onboardingStarts.value += 1;
   onboardingPending.value = false;
+  onboardingVisible.value = false;
+  onboardingStatusNote.value =
+    "The page hid the onboarding hero after the guided start completed. No component-level dismissed lifecycle was added.";
+}
+
+function seedDemoWorkspace() {
+  demoWorkspaceSeeded.value = true;
+  onboardingStatusNote.value =
+    "Loaded a demo workspace from the custom actions slot without expanding the shared two-CTA prop model.";
+}
+
+function skipOnboarding() {
+  onboardingVisible.value = false;
+  onboardingStatusNote.value =
+    "Skipped from the page layer. The example still keeps the once-only decision outside the component library.";
+}
+
+function reopenOnboarding() {
+  onboardingVisible.value = true;
+  onboardingPending.value = false;
+  onboardingStatusNote.value =
+    "The page reopened onboarding to show that visibility remains fully controlled by the host surface.";
 }
 
 async function requestAccess() {
@@ -81,9 +108,9 @@ const summaryCards = computed(() => [
     detail: "The page frame now relies on spacing and rhythm instead of stacked cards.",
   },
   {
-    label: "Saved Views",
-    value: String(savedViews.value).padStart(2, "0"),
-    detail: "Empty-state secondary actions still feel useful in the lighter, quieter layout.",
+    label: "Guided Starts",
+    value: String(onboardingStarts.value).padStart(2, "0"),
+    detail: "Onboarding now uses a dedicated hero with rich media and action slots.",
   },
   {
     label: "Release Notes",
@@ -136,7 +163,7 @@ const summaryCards = computed(() => [
     </section>
 
     <section class="examples-rail" aria-label="State examples">
-      <section class="example-band">
+      <section class="example-band example-band--onboarding">
         <div class="example-band__intro">
           <div class="example-band__meta">
             <p class="example-band__index">Example 01</p>
@@ -191,35 +218,162 @@ const summaryCards = computed(() => [
             <p class="example-band__index">Example 02</p>
             <span class="example-band__tag">OnboardingState</span>
           </div>
-          <h2>Onboarding that starts the workspace before the first empty list</h2>
+          <h2>Onboarding as a launch hero, not a dressed-up empty state</h2>
           <p>
-            This category keeps first-run activation separate from generic empty
-            states. The surface is still calm, but the message is about starting
-            the product, not recovering from missing content.
+            This pass makes onboarding visibly different from the empty-state
+            family. The host page now drives the lifecycle while the component
+            gets a richer media slot, a layered action area, and a stronger
+            first-run hierarchy.
           </p>
-          <p id="workspace-guide" class="example-band__footnote">
-            Workspace setups started from this example: {{ onboardingStarts }}
+          <p id="launch-notes" class="example-band__footnote">
+            Guided starts: {{ onboardingStarts }} · Demo workspace:
+            {{ demoWorkspaceSeeded ? "Seeded" : "Not seeded yet" }}
           </p>
         </div>
 
-        <div class="example-band__stage demo-theme demo-theme--mist">
-          <OnboardingState
-            tone="brand"
-            layout="page"
-            density="compact"
-            title="Create the first workspace for the motion team"
-            description="Start one shared space for briefs, reviewers, and launch approvals before the library begins to fill up."
-            :primary-action="{
-              label: 'Start workspace setup',
-              onClick: startWorkspaceSetup,
-              loading: onboardingPending,
-              loadingLabel: 'Preparing workspace...',
-            }"
-            :secondary-action="{
-              label: 'Read setup guide',
-              href: '#workspace-guide',
-            }"
-          />
+        <div class="example-band__stage example-band__stage--onboarding">
+          <template v-if="onboardingVisible">
+            <OnboardingState
+              tone="brand"
+              layout="page"
+              density="spacious"
+              title="Launch the motion workspace with one guided first run"
+              description="Show the team the product shape, seed the right starting context, and keep tutorial paths visible without collapsing back into a generic empty prompt."
+            >
+              <template #media>
+                <div class="sk-onboarding-media">
+                  <div class="sk-onboarding-media__header">
+                    <div>
+                      <p class="sk-onboarding-media__eyebrow">Launch surface</p>
+                      <strong class="sk-onboarding-media__title">
+                        Motion approvals board
+                      </strong>
+                    </div>
+                    <span class="sk-onboarding-media__chip">Hero media slot</span>
+                  </div>
+
+                  <div class="sk-onboarding-media__window">
+                    <div class="sk-onboarding-media__rail">
+                      <span class="sk-onboarding-media__rail-item is-strong" />
+                      <span class="sk-onboarding-media__rail-item" />
+                      <span class="sk-onboarding-media__rail-item" />
+                      <span class="sk-onboarding-media__rail-item" />
+                    </div>
+
+                    <div class="sk-onboarding-media__canvas">
+                      <div class="sk-onboarding-media__toolbar">
+                        <span class="is-active">Launch brief</span>
+                        <span>Owners</span>
+                        <span>Approvals</span>
+                      </div>
+
+                      <div class="sk-onboarding-media__stats">
+                        <div class="sk-onboarding-media__stat">
+                          <small>Starter tasks</small>
+                          <strong>08</strong>
+                        </div>
+                        <div class="sk-onboarding-media__stat">
+                          <small>Review lanes</small>
+                          <strong>03</strong>
+                        </div>
+                      </div>
+
+                      <div class="sk-onboarding-media__feed">
+                        <div class="sk-onboarding-media__feed-item">
+                          <span />
+                          <span />
+                        </div>
+                        <div class="sk-onboarding-media__feed-item">
+                          <span />
+                          <span />
+                        </div>
+                        <div class="sk-onboarding-media__feed-item">
+                          <span />
+                          <span />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </template>
+
+              <template #actions>
+                <div class="sk-onboarding-actions">
+                  <div class="sk-onboarding-actions__group">
+                    <button
+                      class="sk-shell__action"
+                      :aria-busy="onboardingPending ? 'true' : undefined"
+                      :disabled="onboardingPending"
+                      type="button"
+                      @click="startWorkspaceSetup"
+                    >
+                      {{ onboardingPending ? "Preparing workspace..." : "Start guided setup" }}
+                    </button>
+
+                    <button
+                      class="sk-shell__action is-secondary"
+                      :disabled="onboardingPending"
+                      type="button"
+                      @click="seedDemoWorkspace"
+                    >
+                      {{ demoWorkspaceSeeded ? "Demo workspace seeded" : "Load demo workspace" }}
+                    </button>
+                  </div>
+
+                  <div class="sk-onboarding-actions__secondary">
+                    <a class="sk-shell__action is-secondary" href="#launch-notes">
+                      Read launch guide
+                    </a>
+                    <a class="sk-shell__action is-secondary" href="#launch-notes">
+                      View launch stats
+                    </a>
+                    <button
+                      class="sk-onboarding-actions__skip"
+                      :disabled="onboardingPending"
+                      type="button"
+                      @click="skipOnboarding"
+                    >
+                      Skip for now
+                    </button>
+                  </div>
+                </div>
+              </template>
+            </OnboardingState>
+          </template>
+
+          <template v-else>
+            <div id="launch-notes" class="launch-panel">
+              <div class="launch-panel__copy">
+                <p class="example-band__index">Host page state</p>
+                <h3>Workspace surface unlocked outside the component</h3>
+                <p>{{ onboardingStatusNote }}</p>
+              </div>
+
+              <div class="launch-panel__facts">
+                <div class="launch-panel__fact">
+                  <span>Visibility owner</span>
+                  <strong>Host page</strong>
+                </div>
+                <div class="launch-panel__fact">
+                  <span>Built-in persistence</span>
+                  <strong>Not added</strong>
+                </div>
+                <div class="launch-panel__fact">
+                  <span>Demo content</span>
+                  <strong>{{ demoWorkspaceSeeded ? "Seeded" : "Clean" }}</strong>
+                </div>
+              </div>
+
+              <div class="launch-panel__actions">
+                <button class="launch-panel__button" type="button" @click="reopenOnboarding">
+                  Show onboarding again
+                </button>
+                <a class="launch-panel__button is-secondary" href="#launch-notes">
+                  Back to launch notes
+                </a>
+              </div>
+            </div>
+          </template>
         </div>
       </section>
 

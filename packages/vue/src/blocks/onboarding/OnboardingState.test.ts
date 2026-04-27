@@ -15,15 +15,14 @@ describe("OnboardingState", () => {
     );
     expect(wrapper.get(".sk-shell").attributes("data-layout")).toBe("page");
     expect(wrapper.get(".sk-shell__title").text()).toBe(
-      "Create your first workspace",
+      "Welcome to your launch workspace",
     );
     expect(wrapper.get(".sk-shell__description").text()).toBe(
-      "Start with one shared workspace to organize projects, teammates, and review flows from day one.",
+      "Bring projects, approvals, and teammates into one guided flow so the team can start shipping without rebuilding the basics.",
     );
-    expect(wrapper.findAll(".sk-shell__action").map((action) => action.text())).toEqual([
-      "Create workspace",
-      "View setup guide",
-    ]);
+    expect(wrapper.findAll(".sk-shell__action").map((action) => action.text())).toEqual(
+      ["Start guided setup", "Watch quick walkthrough"],
+    );
   });
 
   it("applies explicit overrides without losing onboarding semantics", () => {
@@ -41,6 +40,29 @@ describe("OnboardingState", () => {
       "Launch the design workspace",
     );
     expect(wrapper.findAll(".sk-shell__action")).toHaveLength(1);
-    expect(wrapper.get(".sk-shell__action").text()).toBe("Create workspace");
+    expect(wrapper.get(".sk-shell__action").text()).toBe("Start guided setup");
+  });
+
+  it("forwards custom media and actions slots to the shared shell", () => {
+    const wrapper = mount(OnboardingState, {
+      slots: {
+        media: '<div data-testid="onboarding-media-slot">Hero media</div>',
+        actions:
+          '<div data-testid="onboarding-actions-slot"><button type="button">Enter workspace</button><button type="button">Skip intro</button></div>',
+      },
+    });
+
+    expect(wrapper.get('[data-testid="onboarding-media-slot"]').text()).toBe(
+      "Hero media",
+    );
+    expect(wrapper.get(".sk-shell__media").attributes("aria-hidden")).toBeUndefined();
+    expect(wrapper.get('[data-testid="onboarding-actions-slot"]').text()).toContain(
+      "Enter workspace",
+    );
+    expect(wrapper.get('[data-testid="onboarding-actions-slot"]').text()).toContain(
+      "Skip intro",
+    );
+    expect(wrapper.text()).not.toContain("Start guided setup");
+    expect(wrapper.text()).not.toContain("Watch quick walkthrough");
   });
 });

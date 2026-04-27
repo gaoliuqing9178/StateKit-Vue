@@ -7,7 +7,7 @@
  * 1. 如果要调整按钮可访问性、布局切换、图形占位符或交互细节，优先改这里。
  * 2. 如果只是改某个 preset 的默认文案，不应该在这里写分支，而应该去改元数据或对应入口组件。
  */
-import { computed } from "vue";
+import { computed, useSlots } from "vue";
 import type {
   BaseStateProps,
   StateAction,
@@ -51,6 +51,7 @@ const props = withDefaults(defineProps<Props>(), {
   layout: "panel" as StateLayout,
   category: "empty" as StateCategory,
 });
+const slots = useSlots();
 
 // 把主次 action 统一归一化成一个数组，模板就只负责渲染，不再关心来源差异。
 const actions = computed<RenderedAction[]>(() =>
@@ -80,6 +81,8 @@ const actions = computed<RenderedAction[]>(() =>
 const categoryLabel = computed(
   () => props.category.charAt(0).toUpperCase() + props.category.slice(1),
 );
+const hasMediaSlot = computed(() => Boolean(slots.media));
+const hasActionsSlot = computed(() => Boolean(slots.actions));
 
 /**
  * 统一处理按钮与链接的点击行为。
@@ -105,7 +108,10 @@ function handleActionClick(action: RenderedAction, event: MouseEvent) {
     :data-tone="props.tone"
   >
     <div class="sk-shell__inner">
-      <div class="sk-shell__media" aria-hidden="true">
+      <div
+        class="sk-shell__media"
+        :aria-hidden="hasMediaSlot ? undefined : 'true'"
+      >
         <div class="sk-shell__media-frame">
           <slot name="media">
             <div
@@ -174,27 +180,29 @@ function handleActionClick(action: RenderedAction, event: MouseEvent) {
           {{ props.description }}
         </p>
 
-        <div v-if="actions.length" class="sk-shell__actions">
-          <component
-            :is="action.component"
-            v-for="action in actions"
-            :key="action.key"
-            class="sk-shell__action"
-            :class="{
-              'is-secondary': action.isSecondary,
-              'is-disabled': action.isDisabled,
-              'is-loading': action.isLoading,
-            }"
-            :aria-busy="action.isLoading ? 'true' : undefined"
-            :aria-disabled="action.isUnavailable ? 'true' : undefined"
-            :disabled="action.component === 'button' ? action.isUnavailable : undefined"
-            :href="action.href"
-            :tabindex="action.tabIndex"
-            :type="action.component === 'button' ? 'button' : undefined"
-            @click="handleActionClick(action, $event)"
-          >
-            {{ action.label }}
-          </component>
+        <div v-if="hasActionsSlot || actions.length" class="sk-shell__actions">
+          <slot name="actions">
+            <component
+              :is="action.component"
+              v-for="action in actions"
+              :key="action.key"
+              class="sk-shell__action"
+              :class="{
+                'is-secondary': action.isSecondary,
+                'is-disabled': action.isDisabled,
+                'is-loading': action.isLoading,
+              }"
+              :aria-busy="action.isLoading ? 'true' : undefined"
+              :aria-disabled="action.isUnavailable ? 'true' : undefined"
+              :disabled="action.component === 'button' ? action.isUnavailable : undefined"
+              :href="action.href"
+              :tabindex="action.tabIndex"
+              :type="action.component === 'button' ? 'button' : undefined"
+              @click="handleActionClick(action, $event)"
+            >
+              {{ action.label }}
+            </component>
+          </slot>
         </div>
       </div>
     </div>

@@ -24,6 +24,20 @@ test.describe("Admin setup and empty states example", () => {
     await expect(demo.getByText("Filters cleared. The inline state keeps the table frame visible, and the clear-filters CTA is now disabled because there is nothing left to reset.")).toBeVisible();
   });
 
+  test("keeps the secondary save-view CTA actionable on the inline example", async ({ page }) => {
+    const demo = page.getByTestId("inline-empty-state-demo");
+    const secondaryAction = demo.getByRole("button", { name: "Save empty view" });
+
+    await secondaryAction.click();
+
+    await expect(
+      demo.getByText(
+        "Saved the current empty result as a reusable review view for the content team.",
+      ),
+    ).toBeVisible();
+    await expect(demo.getByRole("button", { name: "Clear filters" })).toBeVisible();
+  });
+
   test("shows a single panel CTA while collection creation is pending", async ({ page }) => {
     const demo = page.getByTestId("panel-empty-state-demo");
     const primaryAction = demo.getByRole("button", { name: "Create collection" });
@@ -37,22 +51,21 @@ test.describe("Admin setup and empty states example", () => {
     await expect(demo.getByText("Creating a starter collection for the launch team...")).toBeVisible();
     await expect(demo.getByRole("button")).toHaveCount(1);
     await expect(demo.getByText("1 draft")).toBeVisible();
-    await expect(demo.getByText("Starter collection created. The page keeps the empty state visible here so the docs page can continue demonstrating the single-CTA pattern.")).toBeVisible();
+    await expect(
+      demo.getByText(
+        "Starter collection created. The docs page keeps the empty state visible so this example can stay focused on the single-CTA pattern.",
+      ),
+    ).toBeVisible();
   });
 
-  test("keeps onboarding page CTA split between button and link", async ({ page }) => {
-    const demo = page.getByTestId("page-onboarding-state-demo");
-    const primaryAction = demo.getByRole("button", { name: "Start workspace setup" });
-    const secondaryAction = demo.getByRole("link", { name: "Read setup checklist" });
+  test("routes readers to the dedicated onboarding example when they need a hero flow", async ({
+    page,
+  }) => {
+    await page.getByRole("link", { name: "Open onboarding hero example" }).first().click();
 
-    await expect(secondaryAction).toHaveAttribute("href", "/docs/installation");
-
-    await primaryAction.click();
-
-    await expect(demo.getByRole("button", { name: "Preparing workspace..." })).toBeDisabled();
-    await expect(page.getByText("1", { exact: true }).first()).toBeVisible();
-
-    await secondaryAction.click();
-    await expect(page).toHaveURL(/\/docs\/installation$/);
+    await expect(page).toHaveURL(/\/examples\/onboarding-activation$/);
+    await expect(
+      page.getByRole("heading", { name: "Onboarding Activation" }),
+    ).toBeVisible();
   });
 });

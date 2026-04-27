@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { EmptyState, OnboardingState } from "@statekit-vue/vue";
+import { RouterLink } from "vue-router";
+import { EmptyState } from "@statekit-vue/vue";
 
 const activeFilters = ref([
   "Campaign: Spring relaunch",
   "Owner: Brand studio",
   "Status: Needs review",
 ]);
+const savedEmptyViews = ref(0);
 const searchActionNote = ref(
-  "Use the primary action to clear filters. The secondary action stays a real link so the operator can jump straight into content creation.",
+  "Use the primary action to clear filters. The secondary action stays local so the operator can save this empty result as a reusable review view.",
 );
 const collectionPending = ref(false);
 const collectionDrafts = ref(0);
 const collectionActionNote = ref(
-  "This surface intentionally uses a single primary CTA. The preset secondary action is removed with `null`.",
+  "This surface intentionally uses a single primary CTA. The preset secondary action is removed with `null` so the panel stays quiet and task-shaped.",
 );
-const onboardingPending = ref(false);
-const onboardingRuns = ref(0);
 
 function wait(ms: number) {
   return new Promise<void>((resolve) => {
@@ -31,6 +31,7 @@ function clearFilters() {
 }
 
 function saveEmptyView() {
+  savedEmptyViews.value += 1;
   searchActionNote.value =
     "Saved the current empty result as a reusable review view for the content team.";
 }
@@ -42,14 +43,7 @@ async function createCollectionDraft() {
   collectionDrafts.value += 1;
   collectionPending.value = false;
   collectionActionNote.value =
-    "Starter collection created. The page keeps the empty state visible here so the docs page can continue demonstrating the single-CTA pattern.";
-}
-
-async function startWorkspaceSetup() {
-  onboardingPending.value = true;
-  await wait(1200);
-  onboardingRuns.value += 1;
-  onboardingPending.value = false;
+    "Starter collection created. The docs page keeps the empty state visible so this example can stay focused on the single-CTA pattern.";
 }
 
 const searchPrimaryAction = computed(() =>
@@ -70,21 +64,21 @@ const adminMetrics = computed(() => [
     detail: "Live search constraints inside the asset table",
   },
   {
+    label: "Saved empty views",
+    value: String(savedEmptyViews.value),
+    detail: "Reusable review presets created from the inline state",
+  },
+  {
     label: "Draft collections",
     value: String(collectionDrafts.value),
     detail: "Created from the panel CTA in this example",
   },
-  {
-    label: "Setup runs",
-    value: String(onboardingRuns.value),
-    detail: "Workspace onboarding actions triggered here",
-  },
 ]);
 
-const setupChecks = computed(() => [
+const emptyStateGuidance = computed(() => [
   "Inline empty states work best when the surrounding table chrome still matters.",
-  "Panel empty states can hide their preset secondary CTA by passing `:secondary-action=\"null\"`.",
-  "The dedicated onboarding entry keeps first-run setup separate from the generic empty-state family.",
+  'Panel empty states can hide their preset secondary CTA by passing `:secondary-action="null"`. ',
+  "Use the dedicated onboarding example when the moment needs hero media, tutorial actions, or skip logic owned by the page.",
 ]);
 </script>
 
@@ -94,18 +88,21 @@ const setupChecks = computed(() => [
       <div class="demo-shell__header">
         <div>
           <p class="demo-kicker">Example</p>
-          <h1>Admin Setup And Empty States</h1>
+          <h1>Admin Empty States</h1>
           <p>
-            A content operations workspace rewritten around the current
-            category-first API: inline recovery for empty search results, a
-            single-CTA collection setup flow, and a first-run onboarding page
-            with a dedicated public entry plus a real loading button.
+            Two quieter empty-state patterns inside a content operations
+            workspace: inline search recovery that keeps table chrome visible,
+            and a single-CTA panel for creating the first shared collection.
           </p>
         </div>
+
         <div class="demo-chip-row" aria-label="Scenario tags">
           <span class="demo-chip">Inline recovery</span>
           <span class="demo-chip">Single CTA with null</span>
-          <span class="demo-chip">Onboarding entry</span>
+          <span class="demo-chip">Quiet baseline</span>
+          <RouterLink class="button-link is-secondary" to="/examples/onboarding-activation">
+            Open onboarding hero example
+          </RouterLink>
         </div>
       </div>
 
@@ -132,7 +129,7 @@ const setupChecks = computed(() => [
               <p>
                 This example shows an inline empty state with a real `onClick`
                 handler, a disabled state after filters are cleared, and a
-                secondary action that remains actionable.
+                secondary action that stays useful.
               </p>
             </div>
             <span class="demo-badge">EmptyState</span>
@@ -161,6 +158,7 @@ const setupChecks = computed(() => [
               <span>Status</span>
               <span>Owner</span>
             </div>
+
             <EmptyState
               layout="inline"
               density="compact"
@@ -223,42 +221,24 @@ const setupChecks = computed(() => [
           </ul>
         </article>
 
-        <article
-          class="demo-surface demo-surface--span-2"
-          data-testid="page-onboarding-state-demo"
-        >
+        <article class="demo-surface demo-surface--span-2">
           <div class="demo-surface__header">
             <div>
-              <p class="demo-surface__eyebrow">Task</p>
-              <h2>Use the onboarding entry as a true workspace activation step</h2>
+              <p class="demo-surface__eyebrow">Boundary</p>
+              <h2>Keep onboarding separate when the moment needs a hero experience</h2>
               <p>
-                This page layout separates first-run setup from generic empty
-                states. The primary CTA uses a custom loading label, while the
-                secondary CTA remains a real link into the setup guide.
+                `EmptyState` stays intentionally quiet here. Rich media, multi-step
+                actions, and `Skip for now` belong in the dedicated onboarding
+                entry instead of stretching the empty-state baseline.
               </p>
             </div>
-            <span class="demo-badge">OnboardingState</span>
+            <RouterLink class="button-link is-secondary" to="/examples/onboarding-activation">
+              Open onboarding example
+            </RouterLink>
           </div>
 
-          <OnboardingState
-            layout="page"
-            density="spacious"
-            title="Open the workspace with one launch stream"
-            description="Create the workspace, connect owners, and give reviewers a single place to approve assets from day one."
-            :primary-action="{
-              label: 'Start workspace setup',
-              onClick: startWorkspaceSetup,
-              loading: onboardingPending,
-              loadingLabel: 'Preparing workspace...',
-            }"
-            :secondary-action="{
-              label: 'Read setup checklist',
-              href: '/docs/installation',
-            }"
-          />
-
           <ul class="demo-note-list">
-            <li v-for="item in setupChecks" :key="item">{{ item }}</li>
+            <li v-for="item in emptyStateGuidance" :key="item">{{ item }}</li>
           </ul>
         </article>
       </div>

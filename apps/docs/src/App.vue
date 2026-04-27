@@ -40,7 +40,7 @@ const route = useRoute();
           <RouterLink
             class="site-nav__link"
             :class="{ 'is-active': route.path.startsWith('/examples') }"
-            to="/examples/admin-empty-states"
+            to="/examples/onboarding-activation"
           >
             Examples
           </RouterLink>

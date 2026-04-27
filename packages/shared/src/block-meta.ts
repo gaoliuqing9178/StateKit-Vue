@@ -92,19 +92,19 @@ export const stateBlockMetaList: StateBlockMeta[] = [
     componentName: "OnboardingState",
     category: "onboarding",
     summary:
-      "Use as the first-run activation state before a team creates its first workspace.",
+      "Use as the first-run activation state when a team needs a guided start before entering the real workspace.",
     priority: "launch",
     featured: true,
     supportedLayouts: panelAndPage,
     defaults: {
-      title: "Create your first workspace",
+      title: "Welcome to your launch workspace",
       description:
-        "Start with one shared workspace to organize projects, teammates, and review flows from day one.",
+        "Bring projects, approvals, and teammates into one guided flow so the team can start shipping without rebuilding the basics.",
       tone: "brand",
       density: "spacious",
       layout: "page",
-      primaryAction: { label: "Create workspace" },
-      secondaryAction: { label: "View setup guide" },
+      primaryAction: { label: "Start guided setup" },
+      secondaryAction: { label: "Watch quick walkthrough" },
     },
   },
   // loading 类预设：数据、工作区或导入任务尚未完成时的过渡状态。
