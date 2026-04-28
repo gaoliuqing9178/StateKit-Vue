@@ -9,8 +9,8 @@ StateKit 是一个面向 SaaS 产品的 category-first 状态 UI 组件库，当
 - 仓库是 monorepo。
 - `packages/shared` 是 `@statekit-vue/shared` 的源码目录，也是共享类型与 recipe 元数据的单一事实来源。
 - `packages/vue` 提供 `@statekit-vue/vue` 的组件实现、导出和默认样式。
-- `apps/docs` 是文档站与主要人工 QA 面板。
-- `examples/vite-vue-admin` 用于展示更真实的集成场景。
+- `apps/docs` 是文档站与主要人工 QA 面板，同时也是 Playwright 自动化回归的测试宿主。
+- `examples/vite-vue-admin` 用于展示更真实的集成场景，当前以 onboarding-to-completion 流程为主线。
 
 ## 当前实现方式
 
@@ -24,10 +24,13 @@ StateKit 是一个面向 SaaS 产品的 category-first 状态 UI 组件库，当
 - npm 上最新已发布版本：
   - `@statekit-vue/shared@0.2.1`
   - `@statekit-vue/vue@0.2.1`
-- 本地 workspace 当前仍在 `0.2.1` 版本线，但已经包含未发版的 onboarding category pilot。
+- 本地 workspace 当前仍在 `0.2.1` 版本线，但已经包含未发版的 onboarding category pilot 及后续扩展工作。
 
 ## 最近已经完成的工作
 
+- `OnboardingActivationView` 已新增为 docs 的第四个示例页（`/examples/onboarding-activation`），串联完整 first-run 激活流程：workspace → 邀请成员 → 连接集成 → 完成。
+- `examples/vite-vue-admin` 已重做为 onboarding-to-completion 叙事主线，覆盖全部 7 个 category-first 入口。
+- Playwright 测试套件已扩展到 10 个 spec 文件，覆盖所有主路径和移动端断点。
 - example 已完成第一轮视觉重做，方向是更安静、更开放的 editorial layout，而不是 admin 卡片墙。
 - docs 示例页和 docs 站外层样式已一起收口，整体持续减少卡片感。
 - onboarding 已作为独立 category 试点引入，当前先提供 `OnboardingState` 和 `onboarding-workspace` 这条完整链路。
@@ -60,6 +63,7 @@ StateKit 是一个面向 SaaS 产品的 category-first 状态 UI 组件库，当
 - `apps/docs/src/router.ts`
 - `apps/docs/src/lib/recipe-docs.ts`
 - `apps/docs/src/lib/recipe-components.ts`
+- `apps/docs/src/views/examples/OnboardingActivationView.vue`
 
 ## 不要误判的地方
 
@@ -67,18 +71,21 @@ StateKit 是一个面向 SaaS 产品的 category-first 状态 UI 组件库，当
 - onboarding 已经是独立 category，不要再默认把 first-run 激活语义塞回 `empty`。
 - 当前没有第三个 CTA，也没有复杂 slot 系统。
 - docs 站不是 marketing site，而是产品文档和 QA 工具。
-- 当前没有自动化视觉回归；很多视觉调整仍需要人工检查 docs/example。
+- 当前已有 10 个 Playwright spec 文件覆盖主路径和移动端，但仍无自动化视觉像素级回归；插图细节调整仍需人工确认。
 
 ## 当前已验证
 
 - `npm run typecheck` 已通过
 - `npm run build` 已通过
+- `npm run test:unit` 已通过
+- `npm run test:ui` 已通过
 - `npm run pack:check` 已通过
-- `npm run smoke:install` 已通过
+- `npm run smoke:install` 已通过（0.2.1 发布时）
 
 ## 当前优先方向
 
-- 验证 onboarding category pilot 的语义、文档和示例是否足够顺手
-- 继续收 docs/example 的外层视觉，减少卡片感，但不要把站点做成纯 marketing page
-- 给 `error` / `permission` / `success` 这些插图补更稳的视觉回归
+- 确认 onboarding category 的版本发布口径（当前倾向 `0.3.0` minor）
+- 人工浏览 `/examples/onboarding-activation` 和 `examples/vite-vue-admin`，确认 onboarding vs empty vs success 的语义边界在视觉上清晰
+- 补 onboarding 的第 2、3 个 recipe（邀请成员、完成初始连接）
+- 给 `error` / `permission` / `success` 这些插图补截图测试
 - 持续维持 README、package README、launch checklist、handoff notes 的口径一致

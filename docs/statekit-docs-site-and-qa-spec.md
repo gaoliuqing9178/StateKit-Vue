@@ -6,7 +6,7 @@
 
 - 让首次接触 StateKit 的人快速理解产品定位。
 - 让使用者能找到合适的 Block，并看到真实预览。
-- 作为发布前人工 QA 的主要观察面板。
+- 作为发布前人工 QA 的主要观察面板，同时也是 Playwright 自动化回归的测试宿主。
 
 因此 docs 站的内容必须和 shared 元数据、Vue 组件导出保持同步。
 
@@ -19,7 +19,11 @@
 | `/` | 首页，介绍 StateKit 定位、展示 featured blocks、跳转示例页 |
 | `/recipes` | Recipe 总览列表页 |
 | `/recipes/:slug` | 单个 Recipe 详情页，包含 live preview、元数据、代码片段 |
+| `/blocks` | 兼容重定向 → `/recipes` |
+| `/blocks/:slug` | 兼容重定向 → `/recipes/:slug` |
 | `/docs/installation` | 安装与最小接入说明 |
+| `/examples` | 重定向 → `/examples/onboarding-activation` |
+| `/examples/onboarding-activation` | 示例页，展示完整 first-run 激活流程（workspace → 成员 → 集成 → 完成） |
 | `/examples/admin-empty-states` | 示例页，展示 empty 与 onboarding 状态在后台中的组合 |
 | `/examples/permissions-and-upgrade` | 示例页，展示权限与升级场景 |
 | `/examples/task-flow` | 示例页，展示 loading / error / success 流程串联 |
@@ -76,9 +80,16 @@ Recipe 列表页必须：
 - Block 放在合理位置，而不是脱离页面结构单独居中。
 - 能体现为什么这个 Block 适合该场景。
 
+当前四个示例页：
+
+- `/examples/onboarding-activation`：first-run 激活流程的端到端示范（默认入口）。
+- `/examples/admin-empty-states`：后台空状态与 onboarding 状态的组合使用。
+- `/examples/permissions-and-upgrade`：权限限制与升级引导场景。
+- `/examples/task-flow`：loading → error → success 流程串联。
+
 ## QA 原则
 
-当前仓库没有自动化视觉回归，因此 docs 站本身就是最重要的人工 QA 面板。每次重要改动后至少要检查以下内容。
+docs 站是最重要的人工 QA 面板。同时，`apps/docs/tests/` 下已有 10 个 Playwright spec 文件覆盖主路径和移动端断点，提供基础自动化回归。自动化测试通过后，仍需人工确认视觉质量。
 
 ### 基础检查
 
@@ -118,7 +129,7 @@ Recipe 列表页必须：
 | --- | --- |
 | `empty-search` | 空结果语义是否清晰，`inline/panel/page` 是否都成立 |
 | `onboarding-workspace` | `page + spacious + brand` 是否足够像首次启动入口，而不是普通 empty state |
-| `first-project` | 是否已经更清楚地表达“工作区已存在，但还没有首个项目” |
+| `first-project` | 是否已经更清楚地表达"工作区已存在，但还没有首个项目" |
 | `page-error` | 整页错误是否有明确恢复动作 |
 | `no-permission` | `warning` 语气是否准确，不像系统崩溃 |
 | `upgrade-plan` | 商业引导是否自然，不像广告 Banner |
@@ -130,6 +141,7 @@ Recipe 列表页必须：
 
 - `npm run dev:docs` 可启动。
 - `npm run build --workspace @statekit/docs` 通过。
+- `npm run test:ui` 通过（10 个 Playwright spec）。
 - Block 列表数量与 shared 中一致。
 - 每个 launch 级 Block 都有可访问详情页。
 - Installation 页能让新用户完成最基本接入。
@@ -138,7 +150,7 @@ Recipe 列表页必须：
 
 这部分需要诚实记录，而不是在发布前假装不存在：
 
-- 暂无自动化 QA。
-- docs 站的组件映射仍是手工维护的。
-- 示例页数量有限，还不足以覆盖更多复杂 SaaS 流程。
-- 根 README 仍需按 `statekit-readme-outline.md` 单独补齐。
+- 已有 Playwright 自动化覆盖主路径和移动端断点，但暂无像素级视觉回归；插图细节仍需人工确认。
+- docs 站的组件映射仍是手工维护的（`recipe-components.ts`）。
+- 示例页产品流程的覆盖密度还有提升空间，尤其是 permissions-and-upgrade 和 task-flow 示例页的叙事深度。
+- 根 README 仍需按 `statekit-readme-outline.md` 单独补齐（当前 README 已基本符合大纲要求）。

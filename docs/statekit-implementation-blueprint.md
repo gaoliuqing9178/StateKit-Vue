@@ -2,16 +2,16 @@
 
 ## 目标
 
-这份 Blueprint 说明 StateKit 当前仓库是如何组织的，以及未来新增或修改 Block 时应该沿着什么路径改动。它的重点是“和当前实现对齐”，不是画理想化架构图。
+这份 Blueprint 说明 StateKit 当前仓库是如何组织的，以及未来新增或修改 Block 时应该沿着什么路径改动。它的重点是"和当前实现对齐"，不是画理想化架构图。
 
 ## Monorepo 结构
 
 ```text
-H:\lilProject
+H:\StateKit
 ├─ apps
-│  └─ docs                     # 文档站点，展示 Block、安装方式和示例页面
+│  └─ docs                     # 文档站点，展示 Block、安装方式和示例页面；同时作为 Playwright 回归宿主
 ├─ examples
-│  └─ vite-vue-admin           # 管理后台风格示例工程
+│  └─ vite-vue-admin           # onboarding-to-completion 流程示例工程
 ├─ packages
 │  ├─ shared                   # 类型、元数据、Block 清单与事实来源
 │  └─ vue                      # Vue 组件实现与样式
@@ -29,7 +29,7 @@ H:\lilProject
 - 维护 `stateBlockMetaList`、`stateBlockMetaById`、`stateBlockMetaBySlug`。
 - 明确哪些 Block 已实现、哪些属于 launch 优先级。
 
-它是整个项目的“产品规格源”。只要 Block 名称、文案默认值、支持布局或优先级有变化，优先改这里。
+它是整个项目的"产品规格源"。只要 Block 名称、文案默认值、支持布局或优先级有变化，优先改这里。
 
 ### `packages/vue`
 
@@ -52,13 +52,18 @@ H:\lilProject
 - 作为产品文档站展示 StateKit 的价值、安装方式和 Block 明细。
 - 从 `@statekit-vue/shared` 直接读取 Block 元数据。
 - 从 `@statekit-vue/vue` 读取实际组件进行 live preview。
+- 作为 Playwright 自动化回归的宿主（`apps/docs/tests/`，当前 10 个 spec 文件）。
 
 当前站点路由：
 
 - `/`
-- `/blocks`
-- `/blocks/:slug`
+- `/recipes`
+- `/recipes/:slug`
+- `/blocks`（兼容重定向 → `/recipes`）
+- `/blocks/:slug`（兼容重定向 → `/recipes/:slug`）
 - `/docs/installation`
+- `/examples`（重定向 → `/examples/onboarding-activation`）
+- `/examples/onboarding-activation`
 - `/examples/admin-empty-states`
 - `/examples/permissions-and-upgrade`
 - `/examples/task-flow`
@@ -67,7 +72,8 @@ H:\lilProject
 
 职责：
 
-- 在相对真实的 admin shell 中演示 StateKit 的使用方式。
+- 以 onboarding-to-completion 为叙事主线，在相对真实的 admin shell 中演示 StateKit 的使用方式。
+- 顺序串联 `OnboardingState` → `LoadingState` → `ErrorState` → `PermissionState` → `UpgradeState` → `SuccessState` → `EmptyState`，赋予每个 category 真实产品上下文。
 - 用于补齐 docs 站静态预览之外的集成感。
 
 ## 运行时数据流
@@ -80,7 +86,7 @@ H:\lilProject
 4. `packages/vue/src/base/StateBlockShell.vue` 负责最终结构和样式语义。
 5. `apps/docs` 直接消费 shared 元数据和 Vue 组件，生成列表、详情和代码片段。
 
-这意味着 StateKit 当前是“元数据驱动的 preset 组件库”，不是一组彼此完全独立、逐个精细绘制的组件。
+这意味着 StateKit 当前是"元数据驱动的 preset 组件库"，不是一组彼此完全独立、逐个精细绘制的组件。
 
 ## 关键文件
 
@@ -89,9 +95,10 @@ H:\lilProject
 - `packages/vue/src/base/StatePresetBlock.vue`
 - `packages/vue/src/base/StateBlockShell.vue`
 - `packages/vue/src/index.ts`
-- `apps/docs/src/lib/block-docs.ts`
-- `apps/docs/src/lib/block-components.ts`
+- `apps/docs/src/lib/recipe-docs.ts`
+- `apps/docs/src/lib/recipe-components.ts`
 - `apps/docs/src/router.ts`
+- `apps/docs/src/views/examples/OnboardingActivationView.vue`
 
 ## 新增一个 Block 的标准步骤
 
@@ -112,7 +119,7 @@ H:\lilProject
 
 ### 3. 在 docs 站接入
 
-- `apps/docs/src/lib/block-components.ts` 中加入新组件映射。
+- `apps/docs/src/lib/recipe-components.ts` 中加入新组件映射。
 - 确认通过 `stateBlockMetaList` 能在 recipe 列表页自动出现。
 - 验证详情页路由使用的 `slug` 正确可访问。
 
@@ -139,7 +146,7 @@ H:\lilProject
 
 - 所有 Block 共享同一套视觉外壳，类别差异主要通过 tone、背景和媒体图形体现。
 - 使用者当前只能覆盖文本、布局、tone、density 和两个动作按钮。
-- 没有自动化单元测试或视觉回归测试；当前验证主要依赖 `typecheck`、`build` 和人工查看 docs/example。
+- 已有 Vitest 单元测试（`packages/vue/src/base/`）和 Playwright 浏览器测试（`apps/docs/tests/`，10 个 spec），但暂无像素级视觉回归；插图细节调整仍需人工确认。
 - docs 站内容与 shared 元数据关联紧密，因此 shared 是最重要的单一事实来源。
 
 ## 开发命令
@@ -151,6 +158,8 @@ npm run dev:docs
 npm run dev:example
 npm run typecheck
 npm run build
+npm run test:unit
+npm run test:ui
 ```
 
 建议的日常改动流程：
@@ -158,13 +167,13 @@ npm run build
 1. 修改 `shared` 或 `vue`。
 2. 打开 docs 站检查 recipe 列表页和详情页。
 3. 打开 example 工程看集成效果。
-4. 运行 `npm run typecheck` 与 `npm run build`。
+4. 运行 `npm run typecheck`、`npm run build`、`npm run test:unit`、`npm run test:ui`。
 
 ## 后续实现建议
 
 如果未来需要提升可维护性，优先级建议如下：
 
-- 为 docs 增加截图级或 DOM 级回归测试。
+- 为插图补截图级视觉回归（优先：onboarding、error、permission、success 图形）。
 - 减少 docs 站中手写组件映射的重复维护成本。
-- 视需要把 “类别默认图形” 与 “个别 Block 专属图形” 解耦。
+- 视需要把 "类别默认图形" 与 "个别 Block 专属图形" 解耦。
 - 在不破坏 V1 简洁 API 的前提下逐步引入更强的扩展能力。

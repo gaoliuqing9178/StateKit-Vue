@@ -1,5 +1,29 @@
 # StateKit Changelog
 
+## 2026-04-27 Onboarding Hero Flow & Test Coverage (Unreleased)
+
+### Added
+
+- Added `apps/docs/src/views/examples/OnboardingActivationView.vue` as a dedicated onboarding example page, showing the full first-run activation flow from workspace creation through member invite and integration connect to completion.
+- Added `/examples/onboarding-activation` route and redirected the default `/examples` entry to it so onboarding is now the primary example surface.
+- Added five new Playwright test files: `home-featured-recipes.spec.ts`, `installation-navigation.spec.ts`, `mobile-layout.spec.ts`, `onboarding-activation.spec.ts`, and `recipe-detail-paths.spec.ts`, bringing the total browser-level test suite to 10 spec files covering all major routes and mobile breakpoints.
+- Expanded `StateBlockShell` with improved mobile-layout styles and responsive adjustments in `packages/vue/src/styles/base.css`.
+
+### Changed
+
+- Rebuilt `examples/vite-vue-admin/src/App.vue` and `styles.css` around the full onboarding-to-completion flow, surfacing all seven category-first entries in product-realistic sequence instead of the earlier parallel card display.
+- Updated `apps/docs/src/router.ts` to add the `onboarding-activation` route family.
+- Updated `apps/docs/src/lib/copy.ts` and `RecipeDetailView.vue` for onboarding copy and detail page improvements.
+- Expanded `admin-empty-states.spec.ts` with additional assertions.
+
+### Verified
+
+- `npm run typecheck`
+- `npm run build`
+- `npm run test:unit`
+- `npm run test:ui`
+- `npm run pack:check`
+
 ## 2026-04-23 Packaging Cleanup (Unreleased)
 
 ### Changed
